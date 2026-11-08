@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AutoRoute - Intelligent Multi-Modal Transit Routing, Last-Mile Feeder Mobility, Ride Sharing & Concurrent Booking Engine for the Pune-Lonavala-Mumbai corridor.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22><text y=%2220%22 font-size=%2220%22>🚏</text></svg>">
+  <title>AutoRoute - Intelligent Multi-Modal Transit Engine</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gradient-to-br from-[#f0f4ff] via-[#e8f5ee] to-[#f3f0ff] text-slate-800 min-h-screen flex flex-col font-sans">
+<!-- Mobile Sidebar Overlay Backdrop -->
+<div id="sidebar-backdrop" onclick="window.toggleMobileNav()" class="fixed inset-0 bg-slate-900/50 backdrop-blur-xs z-40 hidden md:hidden transition-opacity"></div>
+
+<!-- Left Sidebar Navigation -->
+<aside id="app-sidebar" class="fixed top-0 bottom-0 left-0 w-64 bg-white/95 backdrop-blur-xl border-r border-slate-200/90 shadow-lg z-50 flex flex-col justify-between transition-transform duration-300 ease-in-out -translate-x-full md:translate-x-0">
+  <!-- Brand & Corridor Header -->
+  <div class="p-4 border-b border-slate-100 shrink-0">
+    <div class="flex items-center justify-between">
+      <a href="landing.html" class="flex items-center gap-2.5 group">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-emerald-600 via-teal-600 to-emerald-500 flex items-center justify-center text-white shadow-md shadow-emerald-600/30 group-hover:scale-105 group-hover:rotate-3 transition-transform">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+        </div>
+        <div class="flex flex-col">
+          <span class="text-xl font-extrabold tracking-tight text-slate-900 group-hover:text-emerald-700 transition-colors leading-none">AutoRoute</span>
+          <span class="text-[9px] font-bold text-emerald-600 uppercase tracking-widest mt-0.5">TRANSIT MESH</span>
+        </div>
+      </a>
+      <button class="md:hidden w-8 h-8 rounded-lg hover:bg-slate-100 flex items-center justify-center text-slate-500 cursor-pointer" onclick="window.toggleMobileNav()">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+
+    <div class="mt-3 px-3 py-1.5 rounded-xl bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-200/80 flex items-center justify-between text-[11px] font-bold text-emerald-800">
+      <span class="flex items-center gap-1.5">
+        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span>PUNE &#8644; MUMBAI</span>
+      </span>
+      <span class="text-[10px] bg-emerald-100 px-1.5 py-0.5 rounded text-emerald-700 font-semibold">99.4% On-Time</span>
+    </div>
+  </div>
+
+  <!-- Navigation Links with Categories -->
+  <nav class="flex-grow overflow-y-auto p-3 space-y-4 text-xs font-semibold text-slate-600 no-scrollbar">
+    <!-- Group: Main Platform -->
+    <div>
+      <div class="px-2.5 pb-1 text-[10px] font-extrabold uppercase tracking-wider text-slate-400">Main Platform</div>
+      <div class="space-y-0.5">
+        <a href="landing.html" class="nav-sidebar-link">
+          <span class="text-base">&#127968;</span>
+          <span>Home Showcase</span>
+        </a>
+        <a href="index.html" class="nav-sidebar-link">
+          <span class="text-base">&#129517;</span>
+          <span>Plan Journey</span>
+        </a>
+        <a href="dashboard.html" class="nav-sidebar-link">
+          <span class="text-base">&#128202;</span>
+          <span>Dashboard</span>
+        </a>
+        <a href="ai-assistant.html" class="nav-sidebar-link flex items-center justify-between text-indigo-700 bg-indigo-50/50 hover:bg-indigo-100 font-bold">
+          <div class="flex items-center gap-3">
+            <span class="text-base">&#129302;</span>
+            <span>AI Assistant</span>
+          </div>
+          <span class="text-[9px] bg-indigo-200/80 text-indigo-800 px-1.5 py-0.5 rounded-full font-bold">Tool AI</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Group: Transit & Booking -->
+    <div>
+      <div class="px-2.5 pb-1 text-[10px] font-extrabold uppercase tracking-wider text-slate-400">Transit &amp; Booking</div>
+      <div class="space-y-0.5">
+        <a href="route-results.html" class="nav-sidebar-link">
+          <span class="text-base">&#128256;</span>
+          <span>Route Results</span>
+        </a>
+        <a href="journey-details.html" class="nav-sidebar-link">
+          <span class="text-base">&#9201;&#65039;</span>
+          <span>Journey Details</span>
+        </a>
+        <a href="seat-selection.html" class="nav-sidebar-link">
+          <span class="text-base">&#128186;</span>
+          <span>Seat Selection</span>
+        </a>
+        <a href="smart-pass.html" class="nav-sidebar-link">
+          <span class="text-base">&#127903;&#65039;</span>
+          <span>My Smart Passes</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Group: Simulation Labs -->
+    <div>
+      <div class="px-2.5 pb-1 text-[10px] font-extrabold uppercase tracking-wider text-slate-400">Simulation Labs</div>
+      <div class="space-y-0.5">
+        <a href="journey-simulator.html" class="nav-sidebar-link">
+          <span class="text-base">&#129514;</span>
+          <span>Journey Simulator</span>
+        </a>
+        <a href="disruption-simulator.html" class="nav-sidebar-link">
+          <span class="text-base">&#9889;</span>
+          <span>Disruption Guardian</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Group: Commuter Account -->
+    <div>
+      <div class="px-2.5 pb-1 text-[10px] font-extrabold uppercase tracking-wider text-slate-400">Commuter Account</div>
+      <div class="space-y-0.5">
+        <a href="notifications.html" class="nav-sidebar-link flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <span class="text-base">&#128276;</span>
+            <span>Notifications</span>
+          </div>
+          <span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
+        </a>
+        <a href="profile.html" class="nav-sidebar-link">
+          <span class="text-base">&#128100;</span>
+          <span>Profile &amp; Wallet</span>
+        </a>
+        <a href="login.html" class="nav-sidebar-link">
+          <span class="text-base">&#128272;</span>
+          <span>Sign In / Switch</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Sidebar Footer: Wallet & Profile -->
+  <div class="p-3 border-t border-slate-100 shrink-0 space-y-2 bg-slate-50/60">
+    <div class="p-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-md shadow-emerald-600/25 space-y-1.5">
+      <div class="flex items-center justify-between text-[10px] font-bold text-emerald-100">
+        <span>TRANSIT PAY FAST-TAG</span>
+        <span class="bg-emerald-700/80 px-1.5 py-0.5 rounded text-[9px]">Auto-Reload</span>
+      </div>
+      <div class="flex items-center justify-between">
+        <span class="text-lg font-black tracking-tight" id="sidebar-wallet-val">&#8377;1,450.00</span>
+        <button onclick="window.openAddMoneyModal()" class="px-2.5 py-1 rounded-lg bg-white text-emerald-800 font-extrabold text-[10px] hover:bg-emerald-50 shadow-xs transition-all hover:scale-105 active:scale-95 cursor-pointer">
+          + Add
+        </button>
+      </div>
+    </div>
+
+    <div class="flex items-center justify-between pt-1">
+      <a href="profile.html" class="flex items-center gap-2 group flex-grow">
+        <div class="w-7 h-7 rounded-lg bg-slate-800 text-white font-bold text-xs flex items-center justify-center ring-2 ring-emerald-500/30 group-hover:scale-105 transition-transform">RD</div>
+        <div class="flex flex-col">
+          <span class="text-xs font-bold text-slate-800 group-hover:text-emerald-700 transition-colors leading-tight">Rahul Deshmukh</span>
+          <span class="text-[9px] font-semibold text-emerald-600">Gold Commuter</span>
+        </div>
+      </a>
+      <button class="theme-toggle-btn w-7 h-7 rounded-lg hover:bg-slate-200 flex items-center justify-center text-xs cursor-pointer" onclick="window.toggleTheme()" title="Switch Light/Dark Theme">&#127769;</button>
+    </div>
+  </div>
+</aside>
+<div class="main-content-layout flex flex-col min-h-screen">
+<!-- Top Utility Header -->
+<header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200/80 px-4 sm:px-6 h-14 flex items-center justify-between transition-colors">
+  <div class="flex items-center gap-3">
+    <button onclick="window.toggleMobileNav()" class="md:hidden w-8 h-8 rounded-xl bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-700 cursor-pointer" title="Toggle Navigation Menu">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+    <div class="flex items-center gap-2">
+      <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+      <span class="text-xs font-bold text-slate-700 hidden sm:inline">Western Corridor Transit Mesh</span>
+      <span class="text-xs text-slate-400 hidden sm:inline">&bull; 14 GPS Feeds Active</span>
+    </div>
+  </div>
+
+  <div class="flex items-center gap-2 sm:gap-3">
+    <button onclick="window.openAddMoneyModal()" class="flex items-center gap-1.5 px-3 py-1 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-800 text-xs font-bold border border-emerald-200/80 shadow-xs cursor-pointer transition-all" id="wallet-pill">
+      <span>Transit Pay:</span>
+      <strong id="top-wallet-val" class="font-extrabold text-emerald-700">&#8377;1,450</strong>
+    </button>
+    <a href="notifications.html" class="relative w-8 h-8 rounded-xl bg-slate-100 hover:bg-slate-200/80 flex items-center justify-center text-slate-600 transition-colors" title="Notifications">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.4-1.4A2 2 0 0118 14.2V11a6 6 0 10-12 0v3.2a2 2 0 01-.6 1.4L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+      <span class="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-rose-500 border-2 border-white animate-pulse"></span>
+    </a>
+    <button class="theme-toggle-btn w-8 h-8 rounded-xl bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-xs cursor-pointer" onclick="window.toggleTheme()" title="Switch Light/Dark Theme">&#127769;</button>
+    <a href="profile.html" class="w-8 h-8 rounded-xl bg-gradient-to-tr from-slate-800 to-slate-900 text-white font-bold text-xs flex items-center justify-center ring-2 ring-emerald-500/40 hover:scale-105 transition-all shadow-xs" title="Rahul Deshmukh (Gold Tier)">RD</a>
+  </div>
+</header>
+
+
+<!-- Navigation Header -->
+
+
+
+
+<main class="flex-grow space-y-16 py-8">
+  <!-- 1. Hero Section -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="hero-bg bg-white/95 backdrop-blur-md rounded-3xl border border-emerald-100 shadow-2xl p-6 sm:p-12 relative overflow-hidden float-in">
+      <div class="absolute -right-20 -top-20 w-96 h-96 bg-emerald-400/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -left-20 -bottom-20 w-96 h-96 bg-indigo-400/10 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+        <div class="lg:col-span-7 space-y-5">
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="px-3 py-1 rounded-full font-bold uppercase tracking-wider bg-gradient-to-r from-emerald-600 to-teal-600 text-white text-[10px] shadow-sm shadow-emerald-600/30">
+              ⚡ LIVE TRANSIT ENGINE v2.4
+            </span>
+            <span class="px-3 py-1 rounded-full font-bold text-[10px] bg-indigo-50 text-indigo-700 border border-indigo-200">
+              JAVA 21 &bull; SPRING BOOT &bull; DIJKSTRA DSA
+            </span>
+          </div>
+
+          <h1 class="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight leading-[1.15]">
+            Intelligent Multi-Modal Transit Routing &amp; Concurrent Booking Engine
+          </h1>
+
+          <p class="text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl font-normal">
+            Unifying high-speed rail, regional express buses, metro networks, and shared last-mile feeder mobility along the Pune ⇄ Lonavala ⇄ Mumbai corridor with guaranteed transfers, atomic concurrency protection, and grounded AI guidance.
+          </p>
+
+          <div class="flex flex-wrap items-center gap-3 pt-2">
+            <a href="index.html" class="btn-primary ripple px-6 py-3.5 rounded-2xl text-white font-bold text-sm shadow-lg shadow-emerald-600/30 flex items-center gap-2 hover:scale-105 active:scale-95 transition-all">
+              <span>Plan Your Journey</span>
+              <span>&rarr;</span>
+            </a>
+            <a href="dashboard.html" class="px-5 py-3.5 rounded-2xl border border-slate-200 bg-white hover:border-emerald-400 hover:bg-emerald-50/50 text-slate-700 font-bold text-sm transition-all shadow-xs flex items-center gap-2">
+              <span>Commuter Dashboard</span>
+            </a>
+            <a href="ai-assistant.html" class="px-5 py-3.5 rounded-2xl border border-indigo-200 bg-indigo-50/60 hover:bg-indigo-100/80 text-indigo-700 font-bold text-sm transition-all flex items-center gap-2">
+              <span>🤖 Try AI Assistant</span>
+            </a>
+          </div>
+
+          <!-- Feature Bullets -->
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-4 border-t border-slate-100 text-xs text-slate-600">
+            <div class="flex items-center gap-2">
+              <span class="text-emerald-600 font-bold">✓</span>
+              <span>Dijkstra Shortest Path</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-emerald-600 font-bold">✓</span>
+              <span>ReentrantLock Safe</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-emerald-600 font-bold">✓</span>
+              <span>Dynamic QR Passes</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-emerald-600 font-bold">✓</span>
+              <span>Shared Cab Pooling</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-emerald-600 font-bold">✓</span>
+              <span>FIFO Waitlist Queue</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-emerald-600 font-bold">✓</span>
+              <span>Relay Delay Insurance</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Embedded Interactive Journey Search Card -->
+        <div class="lg:col-span-5">
+          <div class="bg-gradient-to-br from-slate-900 via-emerald-950 to-slate-900 text-white rounded-3xl p-6 sm:p-7 shadow-2xl border border-emerald-500/30 space-y-5">
+            <div class="flex items-center justify-between border-b border-emerald-900/60 pb-3">
+              <div>
+                <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-400">RAPID CORRIDOR ROUTER</span>
+                <div class="text-lg font-black text-white">Find Optimal Commute</div>
+              </div>
+              <span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-emerald-900/60 text-emerald-300 border border-emerald-500/30">
+                ● Live GPS Synced
+              </span>
+            </div>
+
+            <div class="space-y-3">
+              <!-- Origin Selection -->
+              <div class="bg-slate-800/80 p-3 rounded-2xl border border-slate-700 space-y-1">
+                <div class="text-[10px] uppercase font-bold text-slate-400">ORIGIN HUB / METRO STATION</div>
+                <select id="landing-orig" class="w-full bg-transparent text-sm font-bold text-white focus:outline-none cursor-pointer">
+                  <option value="Swargate Metro Station, Pune" class="bg-slate-900" selected>Swargate Hub &amp; Metro (SWRG)</option>
+                  <option value="Pune Railway Junction Terminal" class="bg-slate-900">Pune Junction Terminal (PUNE)</option>
+                  <option value="Shivajinagar Interchange" class="bg-slate-900">Shivajinagar Interchange (SVJR)</option>
+                  <option value="PCMC Station / Pimpri" class="bg-slate-900">PCMC Station / Chinchwad (PCMC)</option>
+                  <option value="Lonavala Hill Junction" class="bg-slate-900">Lonavala Hill Station (LNL)</option>
+                  <option value="Khandala Bhor Ghat Terminal" class="bg-slate-900">Khandala Bhor Ghat Terminal (KND)</option>
+                  <option value="Karjat Central Junction" class="bg-slate-900">Karjat Central Junction (KJT)</option>
+                  <option value="Panvel Transit Terminal" class="bg-slate-900">Panvel Transit Terminal (PNVL)</option>
+                  <option value="Vashi Navi Mumbai Hub" class="bg-slate-900">Vashi Navi Mumbai Hub (VSH)</option>
+                  <option value="Thane Station Junction" class="bg-slate-900">Thane Station Junction (TNA)</option>
+                  <option value="Dadar Central Concourse" class="bg-slate-900">Dadar Central Concourse (DDR)</option>
+                  <option value="Chhatrapati Shivaji Maharaj Terminus (CSMT)" class="bg-slate-900">Mumbai CSMT Terminus (CSMT)</option>
+                  <option value="Bandra Kurla Complex (BKC)" class="bg-slate-900">Bandra Kurla Complex (BKC)</option>
+                  <option value="Mumbai Airport T2 (CSMIA)" class="bg-slate-900">Mumbai Airport T2 (BOM)</option>
+                  <option value="Pune International Airport" class="bg-slate-900">Pune Airport Lohegaon (PNQ)</option>
+                </select>
+              </div>
+
+              <!-- Destination Selection -->
+              <div class="bg-slate-800/80 p-3 rounded-2xl border border-slate-700 space-y-1">
+                <div class="text-[10px] uppercase font-bold text-slate-400">TERMINAL DESTINATION</div>
+                <select id="landing-dest" class="w-full bg-transparent text-sm font-bold text-white focus:outline-none cursor-pointer">
+                  <option value="Chhatrapati Shivaji Maharaj Terminus (CSMT)" class="bg-slate-900" selected>Mumbai CSMT Terminus (CSMT)</option>
+                  <option value="Dadar Central Concourse" class="bg-slate-900">Dadar Central Concourse (DDR)</option>
+                  <option value="Bandra Kurla Complex (BKC)" class="bg-slate-900">Bandra Kurla Complex (BKC)</option>
+                  <option value="Thane Station Junction" class="bg-slate-900">Thane Station Junction (TNA)</option>
+                  <option value="Panvel Transit Terminal" class="bg-slate-900">Panvel Transit Terminal (PNVL)</option>
+                  <option value="Vashi Navi Mumbai Hub" class="bg-slate-900">Vashi Navi Mumbai Hub (VSH)</option>
+                  <option value="Karjat Central Junction" class="bg-slate-900">Karjat Central Junction (KJT)</option>
+                  <option value="Lonavala Hill Junction" class="bg-slate-900">Lonavala Hill Station (LNL)</option>
+                  <option value="Swargate Metro Station, Pune" class="bg-slate-900">Swargate Hub &amp; Metro (SWRG)</option>
+                  <option value="Pune Railway Junction Terminal" class="bg-slate-900">Pune Junction Terminal (PUNE)</option>
+                  <option value="Shivajinagar Interchange" class="bg-slate-900">Shivajinagar Interchange (SVJR)</option>
+                  <option value="Mumbai Airport T2 (CSMIA)" class="bg-slate-900">Mumbai Airport T2 (BOM)</option>
+                  <option value="Pune International Airport" class="bg-slate-900">Pune Airport Lohegaon (PNQ)</option>
+                </select>
+              </div>
+
+              <!-- Optimization Strategy -->
+              <div class="space-y-1">
+                <div class="text-[10px] uppercase font-bold text-slate-400">OPTIMIZE VIA DIJKSTRA STRATEGY</div>
+                <div class="grid grid-cols-3 gap-1.5 text-xs">
+                  <button type="button" onclick="setLandingStrat(this, 'FASTEST')" class="landing-strat-btn p-2 rounded-xl font-bold bg-emerald-600 text-white text-center shadow-xs">⚡ Fastest</button>
+                  <button type="button" onclick="setLandingStrat(this, 'CHEAPEST')" class="landing-strat-btn p-2 rounded-xl font-semibold bg-slate-800 text-slate-300 text-center hover:bg-slate-700">💰 Cheapest</button>
+                  <button type="button" onclick="setLandingStrat(this, 'FEWEST_TRANSFERS')" class="landing-strat-btn p-2 rounded-xl font-semibold bg-slate-800 text-slate-300 text-center hover:bg-slate-700">🔀 Direct</button>
+                </div>
+              </div>
+            </div>
+
+            <button onclick="launchSearchFromLanding()" class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-400 text-slate-950 font-black text-sm shadow-xl shadow-emerald-500/25 hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center gap-2">
+              <span>Compute Optimal Itinerary</span>
+              <span>&rarr;</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Metrics & Live KPI Bar -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div class="bg-white/95 backdrop-blur-sm p-5 rounded-2xl border border-slate-200 shadow-sm space-y-1 kpi-green float-in">
+        <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">CORRIDOR SLA ON-TIME</div>
+        <div class="text-3xl font-black text-slate-900">99.4%</div>
+        <div class="text-xs text-emerald-600 font-semibold">Insured by Relay Guarantee</div>
+      </div>
+      <div class="bg-white/95 backdrop-blur-sm p-5 rounded-2xl border border-slate-200 shadow-sm space-y-1 kpi-blue float-in">
+        <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">DIJKSTRA HEAP COMPUTATION</div>
+        <div class="text-3xl font-black text-indigo-600">&lt; 1 ms</div>
+        <div class="text-xs text-slate-500 font-semibold">PriorityQueue Min-Heap</div>
+      </div>
+      <div class="bg-white/95 backdrop-blur-sm p-5 rounded-2xl border border-slate-200 shadow-sm space-y-1 kpi-violet float-in">
+        <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">CONCURRENCY SAFETY</div>
+        <div class="text-3xl font-black text-slate-900">0% Overbook</div>
+        <div class="text-xs text-slate-500 font-semibold">100 Threads Tested / 20 Seats</div>
+      </div>
+      <div class="bg-white/95 backdrop-blur-sm p-5 rounded-2xl border border-slate-200 shadow-sm space-y-1 kpi-amber float-in">
+        <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">ECO COMMUTE SAVINGS</div>
+        <div class="text-3xl font-black text-emerald-600">42.8 kg</div>
+        <div class="text-xs text-slate-500 font-semibold">CO₂ saved per commuter / mo</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Core Architecture Pillars -->
+  <section id="architecture" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+    <div class="text-center space-y-2">
+      <span class="text-[11px] font-extrabold uppercase tracking-wider text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
+        TECHNICAL EXCELLENCE &bull; INDUSTRY-GRADE OOP &amp; DSA
+      </span>
+      <h2 class="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight">Four Pillars of the AutoRoute Engine</h2>
+      <p class="text-sm text-slate-600 max-w-2xl mx-auto">Engineered in Java 21 and Spring Boot, combining mathematical graph theory, non-blocking concurrency primitives, and grounded AI models.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <!-- Pillar 1 -->
+      <div class="bg-white/95 backdrop-blur-sm p-6 rounded-3xl border border-slate-200 shadow-sm hover:shadow-xl transition-all space-y-3 float-in">
+        <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-black text-xl shadow-sm">
+          📊
+        </div>
+        <h3 class="text-lg font-extrabold text-slate-900">Multi-Modal Dijkstra Engine</h3>
+        <p class="text-xs text-slate-600 leading-relaxed">
+          In-memory adjacency-list graph representing transit nodes and directed edges across rail, metro, bus, and walk legs. Solves Pareto-optimal journeys in &mathcal;O((V+E) log V).
+        </p>
+        <span class="inline-block text-[10px] font-bold text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded border border-emerald-200 font-mono">
+          PriorityQueue Min-Heap
+        </span>
+      </div>
+
+      <!-- Pillar 2 -->
+      <div class="bg-white/95 backdrop-blur-sm p-6 rounded-3xl border border-slate-200 shadow-sm hover:shadow-xl transition-all space-y-3 float-in">
+        <div class="w-12 h-12 rounded-2xl bg-indigo-100 text-indigo-700 flex items-center justify-center font-black text-xl shadow-sm">
+          🛡️
+        </div>
+        <h3 class="text-lg font-extrabold text-slate-900">ReentrantLock Concurrency</h3>
+        <p class="text-xs text-slate-600 leading-relaxed">
+          Fine-grained segment locks prevent double-booking under race condition spikes. Features double-checked availability checks and a FIFO waitlist queue with automated promotion.
+        </p>
+        <span class="inline-block text-[10px] font-bold text-indigo-800 bg-indigo-50 px-2.5 py-1 rounded border border-indigo-200 font-mono">
+          100 Threads Tested
+        </span>
+      </div>
+
+      <!-- Pillar 3 -->
+      <div class="bg-white/95 backdrop-blur-sm p-6 rounded-3xl border border-slate-200 shadow-sm hover:shadow-xl transition-all space-y-3 float-in">
+        <div class="w-12 h-12 rounded-2xl bg-purple-100 text-purple-700 flex items-center justify-center font-black text-xl shadow-sm">
+          🤖
+        </div>
+        <h3 class="text-lg font-extrabold text-slate-900">Tool-Calling AI Assistant</h3>
+        <p class="text-xs text-slate-600 leading-relaxed">
+          Controlled AI service dispatching requests to verified internal tools (routing, seat checks, Ghat delay predictions, carpool optimizer). Zero hallucination guarantee.
+        </p>
+        <span class="inline-block text-[10px] font-bold text-purple-800 bg-purple-50 px-2.5 py-1 rounded border border-purple-200 font-mono">
+          AIToolRegistry
+        </span>
+      </div>
+
+      <!-- Pillar 4 -->
+      <div class="bg-white/95 backdrop-blur-sm p-6 rounded-3xl border border-slate-200 shadow-sm hover:shadow-xl transition-all space-y-3 float-in">
+        <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center font-black text-xl shadow-sm">
+          🛺
+        </div>
+        <h3 class="text-lg font-extrabold text-slate-900">Smart Pass &amp; Cab Pooling</h3>
+        <p class="text-xs text-slate-600 leading-relaxed">
+          Single unified digital transit pass with dynamic encrypted QR tokens. Features arrival-synchronized cab carpooling for co-passengers from the same train coach.
+        </p>
+        <span class="inline-block text-[10px] font-bold text-amber-800 bg-amber-50 px-2.5 py-1 rounded border border-amber-200 font-mono">
+          Up to 35% Fare Split
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Interactive Corridor Topology Visualizer -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+    <div class="bg-gradient-to-tr from-slate-950 via-slate-900 to-slate-950 rounded-3xl p-6 sm:p-10 text-white shadow-2xl border border-slate-800 space-y-6 float-in">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-4">
+        <div>
+          <span class="text-[10px] font-mono text-emerald-400 bg-emerald-950/60 px-2.5 py-1 rounded border border-emerald-500/30 uppercase">
+            GRAPH TOPOLOGY OVERVIEW
+          </span>
+          <h3 class="text-xl sm:text-2xl font-black text-white mt-1">Pune ⇄ Lonavala ⇄ Mumbai Multi-Modal Network</h3>
+        </div>
+        <div class="flex items-center gap-2 text-xs">
+          <span class="flex items-center gap-1.5 text-slate-300"><span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>Rail</span>
+          <span class="flex items-center gap-1.5 text-slate-300"><span class="w-2.5 h-2.5 rounded-full bg-purple-500"></span>Metro</span>
+          <span class="flex items-center gap-1.5 text-slate-300"><span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>Bus</span>
+          <span class="flex items-center gap-1.5 text-slate-300"><span class="w-2.5 h-2.5 rounded-full bg-indigo-500"></span>Feeder Cab</span>
+        </div>
+      </div>
+
+      <!-- Corridor Map Visualization -->
+      <div class="p-4 bg-slate-900/60 rounded-2xl border border-slate-800 overflow-x-auto">
+        <svg viewBox="0 0 900 200" class="w-full min-w-[700px] h-auto">
+          <!-- Rail Line -->
+          <path d="M 60,100 L 220,100 L 450,100 L 640,100 L 840,100" stroke="#059669" stroke-width="5" fill="none"/>
+          <!-- Metro Pune Line -->
+          <path d="M 60,100 C 60,50 140,50 220,100" stroke="#a855f7" stroke-width="3" stroke-dasharray="4,4" fill="none"/>
+          <!-- Bus Highway Artery -->
+          <path d="M 60,100 C 200,160 400,160 640,100" stroke="#f59e0b" stroke-width="3.5" stroke-dasharray="6,4" fill="none"/>
+          <!-- Mumbai Metro Line -->
+          <path d="M 640,100 C 680,40 760,40 840,100" stroke="#a855f7" stroke-width="3" stroke-dasharray="4,4" fill="none"/>
+          <!-- BKC Feeder Link -->
+          <path d="M 640,100 L 720,150" stroke="#6366f1" stroke-width="3" fill="none"/>
+
+          <!-- Nodes -->
+          <circle cx="60" cy="100" r="12" fill="#059669" stroke="#fff" stroke-width="3"/>
+          <text x="60" y="130" font-size="11" fill="#fff" text-anchor="middle" font-weight="bold">Swargate</text>
+          <text x="60" y="145" font-size="9" fill="#94a3b8" text-anchor="middle">Metro L1</text>
+
+          <circle cx="220" cy="100" r="14" fill="#059669" stroke="#fff" stroke-width="3"/>
+          <text x="220" y="130" font-size="11" fill="#fff" text-anchor="middle" font-weight="bold">Pune Jn</text>
+          <text x="220" y="145" font-size="9" fill="#34d399" text-anchor="middle">Intercity Hub</text>
+
+          <circle cx="450" cy="100" r="12" fill="#059669" stroke="#fff" stroke-width="3"/>
+          <text x="450" y="130" font-size="11" fill="#fff" text-anchor="middle" font-weight="bold">Lonavala</text>
+          <text x="450" y="145" font-size="9" fill="#fbbf24" text-anchor="middle">Ghat Gradient 1:37</text>
+
+          <circle cx="640" cy="100" r="14" fill="#059669" stroke="#fff" stroke-width="3"/>
+          <text x="640" y="130" font-size="11" fill="#fff" text-anchor="middle" font-weight="bold">Dadar</text>
+          <text x="640" y="145" font-size="9" fill="#38bdf8" text-anchor="middle">Central Concourse</text>
+
+          <circle cx="720" cy="150" r="10" fill="#6366f1" stroke="#fff" stroke-width="2"/>
+          <text x="720" y="175" font-size="10" fill="#a5b4fc" text-anchor="middle" font-weight="bold">BKC Metro</text>
+
+          <circle cx="840" cy="100" r="14" fill="#0284c7" stroke="#fff" stroke-width="3"/>
+          <text x="840" y="130" font-size="11" fill="#fff" text-anchor="middle" font-weight="bold">Mumbai CSMT</text>
+          <text x="840" y="145" font-size="9" fill="#38bdf8" text-anchor="middle">Terminal</text>
+        </svg>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
+        <div class="p-3.5 rounded-2xl bg-slate-900 border border-slate-800 space-y-1">
+          <div class="font-bold text-emerald-400">⚡ Electrified Mainline Rail</div>
+          <div class="text-slate-400">Vande Bharat Express &bull; Deccan Queen #12124 operating on dedicated high-speed Ghat incline.</div>
+        </div>
+        <div class="p-3.5 rounded-2xl bg-slate-900 border border-slate-800 space-y-1">
+          <div class="font-bold text-amber-400">🚌 Expressway Feeder Buses</div>
+          <div class="text-slate-400">Shivneri Multi-Axle AC fleet providing high-frequency backup during rail track maintenance.</div>
+        </div>
+        <div class="p-3.5 rounded-2xl bg-slate-900 border border-slate-800 space-y-1">
+          <div class="font-bold text-indigo-400">🛺 Arrival-Synced Cohort Cabs</div>
+          <div class="text-slate-400">Automatic carpooling from train coach doors to final workplace destinations with wallet split.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Interactive Live Departure Board -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+      <div>
+        <span class="text-[11px] font-extrabold uppercase tracking-wider text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
+          REAL-TIME TELEMETRY SCHEDULE
+        </span>
+        <h2 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight mt-1">Live Corridor Timetables</h2>
+      </div>
+      <span class="text-xs text-slate-500 font-semibold flex items-center gap-1.5 bg-white border border-slate-200 px-3 py-1.5 rounded-xl shadow-2xs">
+        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+        Synchronized with Central Railway &amp; MSRTC Telemetry
+      </span>
+    </div>
+
+    <div class="bg-white/95 backdrop-blur-sm rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-xs">
+          <thead class="bg-slate-50/80 border-b border-slate-200 text-[10px] font-extrabold uppercase tracking-wider text-slate-400">
+            <tr>
+              <th class="py-3 px-4">Service</th>
+              <th class="py-3 px-4">Origin ➔ Destination</th>
+              <th class="py-3 px-4">Departure</th>
+              <th class="py-3 px-4">Duration</th>
+              <th class="py-3 px-4">Status</th>
+              <th class="py-3 px-4">Fare</th>
+              <th class="py-3 px-4 text-right">Action</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100 font-medium text-slate-700">
+            <tr class="hover:bg-slate-50/60 transition-colors">
+              <td class="py-3.5 px-4 font-bold text-slate-900 flex items-center gap-2">
+                <span class="w-6 h-6 rounded-lg bg-emerald-100 text-emerald-800 flex items-center justify-center text-xs">🚄</span>
+                <div>Vande Bharat Express (#22226)</div>
+              </td>
+              <td class="py-3.5 px-4">Pune Jn ➔ Mumbai CSMT</td>
+              <td class="py-3.5 px-4 font-mono font-bold text-slate-900">07:15 AM</td>
+              <td class="py-3.5 px-4">2h 25m</td>
+              <td class="py-3.5 px-4"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800 border border-emerald-200">On Time</span></td>
+              <td class="py-3.5 px-4 font-black text-slate-900">₹260</td>
+              <td class="py-3.5 px-4 text-right">
+                <button onclick="bookDirectTrain('Vande Bharat Express', 'PUNE', 'CSMT', 260)" class="px-3.5 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-[11px] shadow-xs transition-all hover:scale-105 active:scale-95 cursor-pointer">
+                  Book Seat &rarr;
+                </button>
+              </td>
+            </tr>
+            <tr class="hover:bg-slate-50/60 transition-colors">
+              <td class="py-3.5 px-4 font-bold text-slate-900 flex items-center gap-2">
+                <span class="w-6 h-6 rounded-lg bg-indigo-100 text-indigo-800 flex items-center justify-center text-xs">🚆</span>
+                <div>Deccan Queen Superfast (#12124)</div>
+              </td>
+              <td class="py-3.5 px-4">Pune Jn ➔ Mumbai CSMT</td>
+              <td class="py-3.5 px-4 font-mono font-bold text-slate-900">07:50 AM</td>
+              <td class="py-3.5 px-4">3h 05m</td>
+              <td class="py-3.5 px-4"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800 border border-emerald-200">14 Seats Open</span></td>
+              <td class="py-3.5 px-4 font-black text-slate-900">₹260</td>
+              <td class="py-3.5 px-4 text-right">
+                <button onclick="bookDirectTrain('Deccan Queen', 'PUNE', 'CSMT', 260)" class="px-3.5 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-[11px] shadow-xs transition-all hover:scale-105 active:scale-95 cursor-pointer">
+                  Book Seat &rarr;
+                </button>
+              </td>
+            </tr>
+            <tr class="hover:bg-slate-50/60 transition-colors">
+              <td class="py-3.5 px-4 font-bold text-slate-900 flex items-center gap-2">
+                <span class="w-6 h-6 rounded-lg bg-amber-100 text-amber-800 flex items-center justify-center text-xs">🚌</span>
+                <div>Shivneri Multi-Axle AC (#SH-84)</div>
+              </td>
+              <td class="py-3.5 px-4">Swargate Hub ➔ Dadar Concourse</td>
+              <td class="py-3.5 px-4 font-mono font-bold text-slate-900">08:15 AM</td>
+              <td class="py-3.5 px-4">3h 30m</td>
+              <td class="py-3.5 px-4"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-100 text-blue-800 border border-blue-200">Every 15m</span></td>
+              <td class="py-3.5 px-4 font-black text-slate-900">₹450</td>
+              <td class="py-3.5 px-4 text-right">
+                <button onclick="bookDirectTrain('Shivneri AC', 'SWRG', 'DDR', 450)" class="px-3.5 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-[11px] shadow-xs transition-all hover:scale-105 active:scale-95 cursor-pointer">
+                  Book Seat &rarr;
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Interactive Commuter FAQ Accordion -->
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+    <div class="text-center space-y-2">
+      <span class="text-[11px] font-extrabold uppercase tracking-wider text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
+        HELP &amp; CORRIDOR INFORMATION
+      </span>
+      <h2 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">Frequently Asked Questions</h2>
+      <p class="text-xs sm:text-sm text-slate-500">Everything you need to know about the AutoRoute multi-modal transit network.</p>
+    </div>
+
+    <div class="space-y-3">
+      <div class="accordion-item bg-white/95 backdrop-blur-sm rounded-2xl border border-slate-200 p-4 transition-all">
+        <button onclick="toggleAccordion(this)" class="w-full flex items-center justify-between text-left font-bold text-slate-800 text-sm cursor-pointer">
+          <span>How does the AutoRoute Relay Guarantee work during Ghat delays?</span>
+          <span class="accordion-icon transition-transform text-slate-400 font-bold text-sm">&#9660;</span>
+        </button>
+        <div class="accordion-body hidden mt-3 pt-3 border-t border-slate-100 text-xs text-slate-600 leading-relaxed">
+          If your primary train incurs a delay of 15+ minutes at the Khandala/Monkey Hill incline, the AutoRoute engine automatically credits ₹100 compensation directly to your Transit Pay Fast-Tag wallet and reschedules any matched last-mile cab at the terminal station without extra charges.
+        </div>
+      </div>
+
+      <div class="accordion-item bg-white/95 backdrop-blur-sm rounded-2xl border border-slate-200 p-4 transition-all">
+        <button onclick="toggleAccordion(this)" class="w-full flex items-center justify-between text-left font-bold text-slate-800 text-sm cursor-pointer">
+          <span>Can I book multi-modal segments with a single payment?</span>
+          <span class="accordion-icon transition-transform text-slate-400 font-bold text-sm">&#9660;</span>
+        </button>
+        <div class="accordion-body hidden mt-3 pt-3 border-t border-slate-100 text-xs text-slate-600 leading-relaxed">
+          Yes! AutoRoute issues a single encrypted Smart Pass QR valid across Metro turnstiles, Railway concourses, and MSRTC AC express buses. You do not need multiple tickets or different smart cards.
+        </div>
+      </div>
+
+      <div class="accordion-item bg-white/95 backdrop-blur-sm rounded-2xl border border-slate-200 p-4 transition-all">
+        <button onclick="toggleAccordion(this)" class="w-full flex items-center justify-between text-left font-bold text-slate-800 text-sm cursor-pointer">
+          <span>How does Last-Mile Cohort Cab pooling work?</span>
+          <span class="accordion-icon transition-transform text-slate-400 font-bold text-sm">&#9660;</span>
+        </button>
+        <div class="accordion-body hidden mt-3 pt-3 border-t border-slate-100 text-xs text-slate-600 leading-relaxed">
+          The system matches up to 4 co-passengers departing from the same train coach (e.g. Coach C3) heading toward the same destination district (e.g. BKC or Lower Parel). You receive the assigned EV vehicle number and boarding PIN inside your Smart Pass.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Call To Action -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-700 rounded-3xl p-8 sm:p-12 text-white shadow-2xl flex flex-col md:flex-row md:items-center justify-between gap-6 float-in">
+      <div class="space-y-2">
+        <h3 class="text-2xl sm:text-3xl font-black">Experience the Future of Commute Today</h3>
+        <p class="text-sm text-emerald-100 max-w-xl">Whether planning daily Pune-Mumbai travel or exploring industry-grade Java &amp; DSA architecture, AutoRoute delivers unmatched reliability.</p>
+      </div>
+      <div class="flex flex-wrap items-center gap-3 shrink-0">
+        <a href="index.html" class="px-6 py-3.5 rounded-2xl bg-white text-emerald-900 font-black text-sm shadow-xl hover:bg-emerald-50 transition-all hover:scale-105 active:scale-95">
+          Plan Journey Now &rarr;
+        </a>
+        <a href="ai-assistant.html" class="px-5 py-3.5 rounded-2xl bg-emerald-950/40 border border-white/20 text-white font-bold text-sm hover:bg-emerald-950/60 transition-all">
+          Ask AI Assistant
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Footer -->
+<footer class="bg-white border-t border-slate-200 mt-auto">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 grid grid-cols-2 sm:grid-cols-5 gap-6 text-xs">
+    <div class="col-span-2 sm:col-span-1">
+      <div class="flex items-center gap-2 mb-2">
+        <div class="w-6 h-6 rounded-md bg-gradient-to-tr from-emerald-600 to-teal-400 flex items-center justify-center text-white font-bold">AR</div>
+        <span class="font-extrabold text-slate-900">AutoRoute</span>
+      </div>
+      <p class="text-slate-400">Unified transit mesh for Pune ⇄ Lonavala ⇄ Mumbai.</p>
+    </div>
+    <div>
+      <div class="font-bold text-slate-800 mb-2 uppercase tracking-wide text-[10px]">Platform Views</div>
+      <ul class="space-y-1.5">
+        <li><a href="landing.html" class="text-emerald-600 font-bold">Home Showcase</a></li>
+        <li><a href="dashboard.html" class="text-slate-500 hover:text-emerald-600">Commuter Dashboard</a></li>
+        <li><a href="index.html" class="text-slate-500 hover:text-emerald-600">Plan Journey</a></li>
+        <li><a href="route-results.html" class="text-slate-500 hover:text-emerald-600">Route Results</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="font-bold text-slate-800 mb-2 uppercase tracking-wide text-[10px]">Operations &amp; AI</div>
+      <ul class="space-y-1.5">
+        <li><a href="ai-assistant.html" class="text-slate-500 hover:text-emerald-600">AI Assistant Hub</a></li>
+        <li><a href="seat-selection.html" class="text-slate-500 hover:text-emerald-600">Seat Selection</a></li>
+        <li><a href="journey-simulator.html" class="text-slate-500 hover:text-emerald-600">Journey Simulator</a></li>
+        <li><a href="disruption-simulator.html" class="text-slate-500 hover:text-emerald-600">Disruption Simulator</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="font-bold text-slate-800 mb-2 uppercase tracking-wide text-[10px]">Account</div>
+      <ul class="space-y-1.5">
+        <li><a href="smart-pass.html" class="text-slate-500 hover:text-emerald-600">My Tickets &amp; QR</a></li>
+        <li><a href="notifications.html" class="text-slate-500 hover:text-emerald-600">Notifications</a></li>
+        <li><a href="profile.html" class="text-slate-500 hover:text-emerald-600">Profile &amp; Wallet</a></li>
+        <li><a href="login.html" class="text-slate-500 hover:text-emerald-600">Sign In / Register</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="font-bold text-slate-800 mb-2 uppercase tracking-wide text-[10px]">Corridor Status</div>
+      <p class="text-slate-500 flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-500"></span>Normal Operations</p>
+      <p class="text-slate-400 mt-1">99.4% on-time &bull; 14 GPS feeds active</p>
+    </div>
+  </div>
+  <div class="border-t border-slate-100 py-3 text-center text-[11px] text-slate-400">&copy; 2026 AutoRoute Transit Mesh &middot; Intelligent Multi-Modal Platform</div>
+</footer>
+
+<script>
+let currentLandingStrat = "FASTEST";
+function setLandingStrat(btn, strat) {
+  document.querySelectorAll(".landing-strat-btn").forEach(b => {
+    b.className = "landing-strat-btn p-2 rounded-xl font-semibold bg-slate-800 text-slate-300 text-center hover:bg-slate-700";
+  });
+  btn.className = "landing-strat-btn p-2 rounded-xl font-bold bg-emerald-600 text-white text-center shadow-xs";
+  currentLandingStrat = strat;
+}
+
+function launchSearchFromLanding() {
+  const orig = document.getElementById("landing-orig").value;
+  const dest = document.getElementById("landing-dest").value;
+  const searchObj = {
+    originName: orig,
+    destName: dest,
+    sourceCode: window.resolveStationCode ? window.resolveStationCode(orig) : "PUNE",
+    destCode: window.resolveStationCode ? window.resolveStationCode(dest) : "CSMT",
+    strategy: currentLandingStrat
+  };
+  localStorage.setItem("autoroute_search_query", JSON.stringify(searchObj));
+  window.location.href = "route-results.html";
+}
+</script>
+</div>
+<script src="js/autoroute-desktop.js"></script>
+</body>
+</html>

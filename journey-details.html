@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Review your full multi-modal journey - stops, transfers, timings, reliability and fare breakdown - before selecting a seat.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22><text y=%2220%22 font-size=%2220%22>🚏</text></svg>">
+  <title>AutoRoute - Journey Details</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gradient-to-br from-[#f0f4ff] via-[#e8f5ee] to-[#f3f0ff] text-slate-800 min-h-screen flex flex-col font-sans pb-2">
+<!-- Mobile Sidebar Overlay Backdrop -->
+<div id="sidebar-backdrop" onclick="window.toggleMobileNav()" class="fixed inset-0 bg-slate-900/50 backdrop-blur-xs z-40 hidden md:hidden transition-opacity"></div>
+
+<!-- Left Sidebar Navigation -->
+<aside id="app-sidebar" class="fixed top-0 bottom-0 left-0 w-64 bg-white/95 backdrop-blur-xl border-r border-slate-200/90 shadow-lg z-50 flex flex-col justify-between transition-transform duration-300 ease-in-out -translate-x-full md:translate-x-0">
+  <!-- Brand & Corridor Header -->
+  <div class="p-4 border-b border-slate-100 shrink-0">
+    <div class="flex items-center justify-between">
+      <a href="landing.html" class="flex items-center gap-2.5 group">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-emerald-600 via-teal-600 to-emerald-500 flex items-center justify-center text-white shadow-md shadow-emerald-600/30 group-hover:scale-105 group-hover:rotate-3 transition-transform">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+        </div>
+        <div class="flex flex-col">
+          <span class="text-xl font-extrabold tracking-tight text-slate-900 group-hover:text-emerald-700 transition-colors leading-none">AutoRoute</span>
+          <span class="text-[9px] font-bold text-emerald-600 uppercase tracking-widest mt-0.5">TRANSIT MESH</span>
+        </div>
+      </a>
+      <button class="md:hidden w-8 h-8 rounded-lg hover:bg-slate-100 flex items-center justify-center text-slate-500 cursor-pointer" onclick="window.toggleMobileNav()">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+
+    <div class="mt-3 px-3 py-1.5 rounded-xl bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-200/80 flex items-center justify-between text-[11px] font-bold text-emerald-800">
+      <span class="flex items-center gap-1.5">
+        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span>PUNE &#8644; MUMBAI</span>
+      </span>
+      <span class="text-[10px] bg-emerald-100 px-1.5 py-0.5 rounded text-emerald-700 font-semibold">99.4% On-Time</span>
+    </div>
+  </div>
+
+  <!-- Navigation Links with Categories -->
+  <nav class="flex-grow overflow-y-auto p-3 space-y-4 text-xs font-semibold text-slate-600 no-scrollbar">
+    <!-- Group: Main Platform -->
+    <div>
+      <div class="px-2.5 pb-1 text-[10px] font-extrabold uppercase tracking-wider text-slate-400">Main Platform</div>
+      <div class="space-y-0.5">
+        <a href="landing.html" class="nav-sidebar-link">
+          <span class="text-base">&#127968;</span>
+          <span>Home Showcase</span>
+        </a>
+        <a href="index.html" class="nav-sidebar-link">
+          <span class="text-base">&#129517;</span>
+          <span>Plan Journey</span>
+        </a>
+        <a href="dashboard.html" class="nav-sidebar-link">
+          <span class="text-base">&#128202;</span>
+          <span>Dashboard</span>
+        </a>
+        <a href="ai-assistant.html" class="nav-sidebar-link flex items-center justify-between text-indigo-700 bg-indigo-50/50 hover:bg-indigo-100 font-bold">
+          <div class="flex items-center gap-3">
+            <span class="text-base">&#129302;</span>
+            <span>AI Assistant</span>
+          </div>
+          <span class="text-[9px] bg-indigo-200/80 text-indigo-800 px-1.5 py-0.5 rounded-full font-bold">Tool AI</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Group: Transit & Booking -->
+    <div>
+      <div class="px-2.5 pb-1 text-[10px] font-extrabold uppercase tracking-wider text-slate-400">Transit &amp; Booking</div>
+      <div class="space-y-0.5">
+        <a href="route-results.html" class="nav-sidebar-link">
+          <span class="text-base">&#128256;</span>
+          <span>Route Results</span>
+        </a>
+        <a href="journey-details.html" class="nav-sidebar-link">
+          <span class="text-base">&#9201;&#65039;</span>
+          <span>Journey Details</span>
+        </a>
+        <a href="seat-selection.html" class="nav-sidebar-link">
+          <span class="text-base">&#128186;</span>
+          <span>Seat Selection</span>
+        </a>
+        <a href="smart-pass.html" class="nav-sidebar-link">
+          <span class="text-base">&#127903;&#65039;</span>
+          <span>My Smart Passes</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Group: Simulation Labs -->
+    <div>
+      <div class="px-2.5 pb-1 text-[10px] font-extrabold uppercase tracking-wider text-slate-400">Simulation Labs</div>
+      <div class="space-y-0.5">
+        <a href="journey-simulator.html" class="nav-sidebar-link">
+          <span class="text-base">&#129514;</span>
+          <span>Journey Simulator</span>
+        </a>
+        <a href="disruption-simulator.html" class="nav-sidebar-link">
+          <span class="text-base">&#9889;</span>
+          <span>Disruption Guardian</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Group: Commuter Account -->
+    <div>
+      <div class="px-2.5 pb-1 text-[10px] font-extrabold uppercase tracking-wider text-slate-400">Commuter Account</div>
+      <div class="space-y-0.5">
+        <a href="notifications.html" class="nav-sidebar-link flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <span class="text-base">&#128276;</span>
+            <span>Notifications</span>
+          </div>
+          <span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
+        </a>
+        <a href="profile.html" class="nav-sidebar-link">
+          <span class="text-base">&#128100;</span>
+          <span>Profile &amp; Wallet</span>
+        </a>
+        <a href="login.html" class="nav-sidebar-link">
+          <span class="text-base">&#128272;</span>
+          <span>Sign In / Switch</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Sidebar Footer: Wallet & Profile -->
+  <div class="p-3 border-t border-slate-100 shrink-0 space-y-2 bg-slate-50/60">
+    <div class="p-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-md shadow-emerald-600/25 space-y-1.5">
+      <div class="flex items-center justify-between text-[10px] font-bold text-emerald-100">
+        <span>TRANSIT PAY FAST-TAG</span>
+        <span class="bg-emerald-700/80 px-1.5 py-0.5 rounded text-[9px]">Auto-Reload</span>
+      </div>
+      <div class="flex items-center justify-between">
+        <span class="text-lg font-black tracking-tight" id="sidebar-wallet-val">&#8377;1,450.00</span>
+        <button onclick="window.openAddMoneyModal()" class="px-2.5 py-1 rounded-lg bg-white text-emerald-800 font-extrabold text-[10px] hover:bg-emerald-50 shadow-xs transition-all hover:scale-105 active:scale-95 cursor-pointer">
+          + Add
+        </button>
+      </div>
+    </div>
+
+    <div class="flex items-center justify-between pt-1">
+      <a href="profile.html" class="flex items-center gap-2 group flex-grow">
+        <div class="w-7 h-7 rounded-lg bg-slate-800 text-white font-bold text-xs flex items-center justify-center ring-2 ring-emerald-500/30 group-hover:scale-105 transition-transform">RD</div>
+        <div class="flex flex-col">
+          <span class="text-xs font-bold text-slate-800 group-hover:text-emerald-700 transition-colors leading-tight">Rahul Deshmukh</span>
+          <span class="text-[9px] font-semibold text-emerald-600">Gold Commuter</span>
+        </div>
+      </a>
+      <button class="theme-toggle-btn w-7 h-7 rounded-lg hover:bg-slate-200 flex items-center justify-center text-xs cursor-pointer" onclick="window.toggleTheme()" title="Switch Light/Dark Theme">&#127769;</button>
+    </div>
+  </div>
+</aside>
+<div class="main-content-layout flex flex-col min-h-screen">
+<!-- Top Utility Header -->
+<header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200/80 px-4 sm:px-6 h-14 flex items-center justify-between transition-colors">
+  <div class="flex items-center gap-3">
+    <button onclick="window.toggleMobileNav()" class="md:hidden w-8 h-8 rounded-xl bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-700 cursor-pointer" title="Toggle Navigation Menu">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+    <div class="flex items-center gap-2">
+      <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+      <span class="text-xs font-bold text-slate-700 hidden sm:inline">Western Corridor Transit Mesh</span>
+      <span class="text-xs text-slate-400 hidden sm:inline">&bull; 14 GPS Feeds Active</span>
+    </div>
+  </div>
+
+  <div class="flex items-center gap-2 sm:gap-3">
+    <button onclick="window.openAddMoneyModal()" class="flex items-center gap-1.5 px-3 py-1 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-800 text-xs font-bold border border-emerald-200/80 shadow-xs cursor-pointer transition-all" id="wallet-pill">
+      <span>Transit Pay:</span>
+      <strong id="top-wallet-val" class="font-extrabold text-emerald-700">&#8377;1,450</strong>
+    </button>
+    <a href="notifications.html" class="relative w-8 h-8 rounded-xl bg-slate-100 hover:bg-slate-200/80 flex items-center justify-center text-slate-600 transition-colors" title="Notifications">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.4-1.4A2 2 0 0118 14.2V11a6 6 0 10-12 0v3.2a2 2 0 01-.6 1.4L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+      <span class="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-rose-500 border-2 border-white animate-pulse"></span>
+    </a>
+    <button class="theme-toggle-btn w-8 h-8 rounded-xl bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-xs cursor-pointer" onclick="window.toggleTheme()" title="Switch Light/Dark Theme">&#127769;</button>
+    <a href="profile.html" class="w-8 h-8 rounded-xl bg-gradient-to-tr from-slate-800 to-slate-900 text-white font-bold text-xs flex items-center justify-center ring-2 ring-emerald-500/40 hover:scale-105 transition-all shadow-xs" title="Rahul Deshmukh (Gold Tier)">RD</a>
+  </div>
+</header>
+
+
+
+
+<main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-5">
+  <div class="flex items-center justify-between flex-wrap gap-3">
+    <a href="route-results.html" class="text-xs font-semibold text-slate-500 hover:text-slate-800 flex items-center gap-1">&larr; Back to Route Results</a>
+    <span class="flex items-center gap-1.5 text-[11px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-full"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>TELEMETRY STREAM ACTIVE &bull; Latency 240ms</span>
+  </div>
+
+  <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-4 sm:p-5">
+    <div class="flex items-center justify-between text-xs">
+      <div class="flex items-center gap-2 text-emerald-700 font-bold"><span class="w-5 h-5 rounded-full bg-emerald-600 text-white flex items-center justify-center text-[10px]">&#10003;</span>Step 1 &bull; Route Search</div>
+      <div class="flex-grow h-px bg-slate-200 mx-2"></div>
+      <div class="flex items-center gap-2 text-emerald-700 font-bold"><span class="w-5 h-5 rounded-full bg-emerald-600 text-white flex items-center justify-center text-[10px]">2</span>Step 2 &bull; Journey Details</div>
+      <div class="flex-grow h-px bg-slate-200 mx-2"></div>
+      <div class="flex items-center gap-2 text-slate-400 font-bold"><span class="w-5 h-5 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center text-[10px]">3</span>Step 3 &bull; Seat Selection</div>
+      <div class="flex-grow h-px bg-slate-200 mx-2"></div>
+      <div class="flex items-center gap-2 text-slate-400 font-bold"><span class="w-5 h-5 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center text-[10px]">4</span>Step 4 &bull; Payment</div>
+    </div>
+  </div>
+
+  <div class="hero-bg bg-emerald-50 rounded-2xl border border-emerald-200 p-4 sm:p-5 flex flex-wrap items-center justify-between gap-3 float-in">
+    <div>
+      <div class="flex items-center gap-2 text-[10px] font-bold uppercase tracking-wider text-emerald-700"><span>CORRIDOR ROUTE #CR-882</span><span class="text-emerald-400">&bull;</span><span>PUNE-LONAVALA-MUMBAI INTERCITY</span><span class="text-emerald-400">&bull;</span><span class="flex items-center gap-1">&#9889; FASTEST DIRECT TRI-MODAL</span></div>
+      <h1 class="text-xl sm:text-2xl font-black text-slate-900 mt-1 flex items-center gap-2">Pune <span class="text-sm font-medium text-slate-400">(Swargate)</span><span class="text-emerald-500">&rarr;</span>Mumbai <span class="text-sm font-medium text-slate-400">(CSMT Terminal)</span></h1>
+    </div>
+    <div class="grid grid-cols-3 gap-3 text-xs">
+      <div class="bg-white p-2.5 rounded-xl border border-emerald-100"><div class="text-[10px] font-bold uppercase text-slate-400">Travel Date</div><div class="font-bold text-slate-800 mt-0.5">Today, 24 Oct</div></div>
+      <div class="bg-white p-2.5 rounded-xl border border-emerald-100"><div class="text-[10px] font-bold uppercase text-slate-400">Total Window</div><div class="font-bold text-slate-800 mt-0.5">08:45 - 11:55 AM</div></div>
+      <div class="bg-white p-2.5 rounded-xl border border-emerald-100"><div class="text-[10px] font-bold uppercase text-slate-400">Transit Time</div><div class="font-bold text-emerald-700 mt-0.5">3h 10m (Seamless)</div></div>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+    <div class="lg:col-span-2 space-y-4">
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 float-in float-in-1">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="font-bold text-slate-900 flex items-center gap-2">&#128663; Multi-Modal Journey Ledger</h2>
+          <span class="text-[11px] text-slate-400 flex items-center gap-2"><span class="flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>3 Synchronized Legs</span><span>&bull;</span><span>2 Protected Transfers</span></span>
+        </div>
+
+        <div class="space-y-3">
+          <div class="border border-slate-200 rounded-xl p-3.5">
+            <div class="flex items-center justify-between text-xs mb-2"><span class="font-bold text-slate-700 flex items-center gap-1.5">&#128652; Pune Metro &bull; Line 1 (Purple) <span class="text-slate-400 font-normal">Underground Express Run</span></span><span class="flex items-center gap-2"><span class="font-mono text-slate-500">Fare: &#8377;25.00</span><span class="px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-bold">Auto-Gate Validated</span></span></div>
+            <div class="flex items-start gap-3 text-xs">
+              <div class="flex flex-col items-center pt-1"><span class="w-2.5 h-2.5 rounded-full bg-emerald-600"></span><span class="w-px h-8 bg-slate-200"></span><span class="w-2.5 h-2.5 rounded-full bg-emerald-600"></span></div>
+              <div class="flex-grow space-y-3">
+                <div><div class="font-bold text-slate-800">08:45 AM <span class="text-emerald-600 font-semibold">(On Time)</span></div><div class="text-slate-500">Swargate Underground Station</div><div class="text-slate-400">Platform 2 &bull; Entry via Concourse Gate 3 (Escalator Bank A)</div></div>
+                <div><div class="font-bold text-slate-800">08:59 AM <span class="text-emerald-600 font-semibold">(Schedule Met)</span></div><div class="text-slate-500">Pune Railway Station Concourse</div><div class="text-slate-400">Metro Exit Gate B &bull; Direct FOB Link to IR Platform 1</div></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-3 bg-emerald-50 border border-emerald-200 rounded-xl p-3">
+            <div class="w-8 h-8 rounded-lg bg-emerald-600 text-white flex items-center justify-center text-sm shrink-0">&#128694;</div>
+            <div class="flex-grow text-xs"><div class="font-bold text-emerald-800">16 min Protected Transfer Window <span class="font-normal text-emerald-600">Zero-Miss Guarantee</span></div><div class="text-emerald-700">Covered elevated foot overbridge (FOB) connector with automated baggage assistance from Metro Exit Gate B to Indian Railways Platform 1.</div><div class="text-emerald-600 mt-1 flex items-center gap-3"><span>&#128694; Walking Distance: 180m (~4 mins)</span><span>&#9200; 12 mins Safe Surplus Buffer</span></div></div>
+            <button onclick="window.openConcourseModal('Pune Station Intermodal Concourse')" class="text-[10px] font-bold text-emerald-700 bg-white border border-emerald-200 px-2.5 py-1.5 rounded-lg whitespace-nowrap shrink-0 hover:bg-emerald-50 transition-colors cursor-pointer">Concourse Map</button>
+          </div>
+
+          <!-- Leg 2 Intercity Rail -->
+          <div class="border border-slate-200 rounded-2xl p-4 bg-gradient-to-r from-emerald-50/40 to-white space-y-3">
+            <div class="flex items-center justify-between text-xs mb-1">
+              <span class="font-bold text-slate-800 flex items-center gap-1.5">&#128646; Central Railway &bull; Superfast Express #12124 <span class="text-slate-500 font-normal">Deccan Queen Express</span></span>
+              <span class="font-mono font-bold text-emerald-800">Fare: &#8377;195.00</span>
+            </div>
+            <div class="flex items-start gap-3 text-xs">
+              <div class="flex flex-col items-center pt-1"><span class="w-2.5 h-2.5 rounded-full bg-emerald-600"></span><span class="w-px h-10 bg-slate-200"></span><span class="w-2.5 h-2.5 rounded-full bg-emerald-600"></span></div>
+              <div class="flex-grow space-y-2">
+                <div><div class="font-bold text-slate-800">09:15 AM <span class="text-emerald-600 font-semibold">(Right Time Start)</span></div><div class="text-slate-500">Pune Junction Railway Station (PUNE)</div><div class="text-slate-400">Platform 1 &bull; Coach Position: Front Rake (Coach C3 AC Chair Car)</div></div>
+                <div><div class="font-bold text-slate-800">11:40 AM <span class="text-emerald-600 font-semibold">(On Schedule)</span></div><div class="text-slate-500">Dadar Central (DR)</div><div class="text-slate-400">Platform 4 &bull; Direct Underground Walk to Metro Aqua Line 3</div></div>
+              </div>
+            </div>
+
+            <!-- Feature 3: Coach Density Indicator -->
+            <div class="p-2.5 rounded-xl bg-white border border-emerald-100 flex items-center justify-between text-xs">
+              <div class="flex items-center gap-2">
+                <span class="text-emerald-700 font-bold">👥 Coach Density:</span>
+                <span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-extrabold text-[10px]">Coach C3: 32% Full</span>
+              </div>
+              <span class="text-[11px] text-slate-500">Low luggage congestion &bull; 44 seats empty</span>
+            </div>
+          </div>
+
+          <!-- Leg 3 Metro -->
+          <div class="border border-slate-200 rounded-2xl p-4">
+            <div class="flex items-center justify-between text-xs mb-2">
+              <span class="font-bold text-slate-700 flex items-center gap-1.5">&#128652; Mumbai Metro &bull; Line 3 (Aqua) <span class="text-slate-400 font-normal">Underground Terminal Run</span></span>
+              <span class="font-mono font-bold text-slate-700">Fare: &#8377;40.00</span>
+            </div>
+            <div class="flex items-start gap-3 text-xs">
+              <div class="flex flex-col items-center pt-1"><span class="w-2.5 h-2.5 rounded-full bg-sky-600"></span><span class="w-px h-6 bg-slate-200"></span><span class="w-2.5 h-2.5 rounded-full bg-sky-600"></span></div>
+              <div class="flex-grow space-y-1">
+                <div><div class="font-bold text-slate-800">11:47 AM</div><div class="text-slate-500">Dadar Metro Concourse</div></div>
+                <div><div class="font-bold text-slate-800">11:55 AM</div><div class="text-slate-500">CSMT Underground Station</div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Feature 1: Leg 4 Last-Mile Cohort Feeder -->
+          <div class="last-mile-card rounded-2xl p-4 space-y-3">
+            <div class="flex items-center justify-between text-xs">
+              <div class="flex items-center gap-2">
+                <span class="w-6 h-6 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-xs">🛺</span>
+                <span class="font-bold text-slate-800">Leg 4: Commuter Cab Pool (CSMT ➔ BKC / Lower Parel)</span>
+              </div>
+              <span class="pool-badge text-[10px] font-bold px-2 py-0.5 rounded-full">Cohort Synced</span>
+            </div>
+            <div class="flex items-center justify-between text-xs bg-white/80 p-2.5 rounded-xl border border-indigo-100">
+              <div>
+                <div class="font-bold text-slate-900">Tata Tigor EV &bull; MH-01-DK-4819</div>
+                <div class="text-[11px] text-slate-500">Pick-up: CSMT East Gate (Bay 4) &bull; Boarding OTP: <strong class="text-emerald-700 font-mono">8841</strong></div>
+              </div>
+              <div class="text-right">
+                <div class="font-black text-slate-900">₹85.00</div>
+                <div class="text-[10px] text-emerald-600 font-semibold">Saved ₹255 vs solo cab</div>
+              </div>
+            </div>
+            <div class="flex items-center gap-2 text-[11px] text-slate-600">
+              <span class="text-indigo-700 font-bold">👥 Matched with 3 co-passengers from your coach:</span>
+              <span class="text-slate-500">Ananya (C3), Vikram (C3), Sneha (C3)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5">
+        <h2 class="font-bold text-slate-900 mb-3 flex items-center gap-2">&#128506; Corridor Elevation &amp; Route Track</h2>
+        <div class="flex items-end justify-between gap-2 h-20 px-2">
+          <div class="flex flex-col items-center gap-1 text-[10px] text-slate-400 flex-grow"><div class="w-full bg-emerald-100 rounded-t" style="height:30%"></div>Swargate<br>560m</div>
+          <div class="flex flex-col items-center gap-1 text-[10px] text-slate-400 flex-grow"><div class="w-full bg-emerald-300 rounded-t" style="height:70%"></div>Lonavala<br>625m</div>
+          <div class="flex flex-col items-center gap-1 text-[10px] text-slate-400 flex-grow"><div class="w-full bg-emerald-500 rounded-t" style="height:10%"></div>CSMT<br>11m</div>
+        </div>
+        <div class="text-[11px] text-slate-400 mt-2 text-center">176 km total corridor track</div>
+      </div>
+    </div>
+
+    <div class="space-y-4">
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5">
+        <div class="flex items-center justify-between mb-4"><h2 class="font-bold text-slate-900">Trip Summary &amp; Telemetry</h2><span class="text-[10px] font-bold bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">98.4% SCORE</span></div>
+        <div class="grid grid-cols-2 gap-3 text-xs mb-4">
+          <div><div class="text-[10px] font-bold uppercase text-slate-400">Total Duration</div><div class="font-black text-slate-900 text-base">3h 10m</div><div class="text-slate-400">Fastest Corridor</div></div>
+          <div><div class="text-[10px] font-bold uppercase text-slate-400">Transfers</div><div class="font-black text-slate-900 text-base">2 Guided</div><div class="text-slate-400">Covered Walkways</div></div>
+        </div>
+        <div class="space-y-2.5 text-xs">
+          <div><div class="flex justify-between mb-1"><span class="text-slate-500">On-Time Historical Performance</span><span class="font-bold text-slate-700">99.1%</span></div><div class="h-1.5 rounded-full bg-slate-100"><div class="h-1.5 rounded-full bg-emerald-500" style="width:99%"></div></div></div>
+          <div><div class="flex justify-between mb-1"><span class="text-slate-500">Transfer Connection Reliability</span><span class="font-bold text-slate-700">98.7%</span></div><div class="h-1.5 rounded-full bg-slate-100"><div class="h-1.5 rounded-full bg-emerald-500" style="width:99%"></div></div></div>
+          <div><div class="flex justify-between mb-1"><span class="text-slate-500">Vehicle &amp; Rolling Stock Uptime</span><span class="font-bold text-slate-700">97.4%</span></div><div class="h-1.5 rounded-full bg-slate-100"><div class="h-1.5 rounded-full bg-emerald-500" style="width:97%"></div></div></div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5">
+        <h2 class="font-bold text-slate-900 mb-3">Fare Breakdown</h2>
+        <div class="space-y-2 text-xs">
+          <div class="flex justify-between"><span class="text-slate-500">Leg 1: Pune Metro (Purple Line)</span><span class="font-mono font-semibold text-slate-700">&#8377;25.00</span></div>
+          <div class="flex justify-between"><span class="text-slate-500">Leg 2: Deccan Queen AC Chair Car</span><span class="font-mono font-semibold text-slate-700">&#8377;195.00</span></div>
+          <div class="flex justify-between"><span class="text-slate-500">Leg 3: Mumbai Metro Line 3 (Aqua)</span><span class="font-mono font-semibold text-slate-700">&#8377;40.00</span></div>
+          <div class="h-px bg-slate-100 my-1"></div>
+          <div class="flex justify-between"><span class="text-slate-500">Subtotal Transit Fare</span><span class="font-mono text-slate-700">&#8377;260.00</span></div>
+          <div class="flex justify-between"><span class="text-slate-500">Multi-Modal Interchange Surcharge</span><span class="font-mono text-emerald-600">&#8377;0.00 (Waived)</span></div>
+          <div class="flex justify-between"><span class="text-slate-500">Zero-Delay Protection Guarantee</span><span class="font-mono text-emerald-600">FREE</span></div>
+          <div class="h-px bg-slate-100 my-1"></div>
+          <div class="flex justify-between items-center pt-1"><span class="font-bold text-slate-900">Total Fare to Pay</span><div class="text-right"><div class="font-black text-lg text-slate-900">&#8377;260.00</div><div class="text-[10px] text-slate-400">All Taxes &amp; GST Incl.</div></div></div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-4">
+        <p class="text-xs text-slate-500 mb-3">Something look off with this route?</p>
+        <div class="flex items-center justify-between">
+          <a href="ai-assistant.html" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1 hover:underline">🤖 Ask AutoRoute AI</a>
+          <a href="disruption-simulator.html" class="text-xs font-bold text-rose-600 hover:underline flex items-center gap-1">⚠️ Report Issue &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<div class="sticky bottom-0 bg-white border-t border-slate-200 shadow-[0_-4px_12px_rgba(0,0,0,0.04)] z-30">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
+    <div class="text-xs"><span class="text-slate-400">Total Fare</span> <span class="font-black text-slate-900 text-base ml-1">&#8377;260.00</span></div>
+    <a href="seat-selection.html" class="px-6 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold text-sm shadow-md shadow-emerald-600/30 transition-all active:scale-95 flex items-center gap-1.5 btn-primary ripple">Continue to Seat Selection<span>&rarr;</span></a>
+  </div>
+</div>
+<footer class="bg-white border-t border-slate-200 mt-auto">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 grid grid-cols-2 sm:grid-cols-5 gap-6 text-xs">
+    <div class="col-span-2 sm:col-span-1">
+      <div class="flex items-center gap-2 mb-2"><div class="w-6 h-6 rounded-md bg-gradient-to-tr from-emerald-600 to-teal-400 flex items-center justify-center text-white"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div><span class="font-extrabold text-slate-900">AutoRoute</span></div>
+      <p class="text-slate-400">Unified transit mesh for the Pune ⇄ Lonavala ⇄ Mumbai corridor.</p>
+    </div>
+    <div>
+      <div class="font-bold text-slate-800 mb-2 uppercase tracking-wide text-[10px]">Plan &amp; Travel</div>
+      <ul class="space-y-1.5">
+        <li><a href="index.html" class="text-slate-500 hover:text-emerald-600">Plan Journey</a></li>
+        <li><a href="route-results.html" class="text-slate-500 hover:text-emerald-600">Route Results</a></li>
+        <li><a href="journey-details.html" class="text-slate-500 hover:text-emerald-600">Journey Details</a></li>
+        <li><a href="seat-selection.html" class="text-slate-500 hover:text-emerald-600">Seat Selection</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="font-bold text-slate-800 mb-2 uppercase tracking-wide text-[10px]">Account</div>
+      <ul class="space-y-1.5">
+        <li><a href="dashboard.html" class="text-slate-500 hover:text-emerald-600">Dashboard</a></li>
+        <li><a href="smart-pass.html" class="text-slate-500 hover:text-emerald-600">My Tickets &amp; History</a></li>
+        <li><a href="notifications.html" class="text-slate-500 hover:text-emerald-600">Notifications</a></li>
+        <li><a href="profile.html" class="text-slate-500 hover:text-emerald-600">Profile</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="font-bold text-slate-800 mb-2 uppercase tracking-wide text-[10px]">Tools</div>
+      <ul class="space-y-1.5">
+        <li><a href="journey-simulator.html" class="text-slate-500 hover:text-emerald-600">Journey Simulator</a></li>
+        <li><a href="ai-assistant.html" class="text-slate-500 hover:text-emerald-600">AI Assistant Hub</a></li>
+        <li><a href="disruption-simulator.html" class="text-slate-500 hover:text-emerald-600">Disruption Simulator</a></li>
+        <li><a href="login.html" class="text-slate-500 hover:text-emerald-600">Sign In / Register</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="font-bold text-slate-800 mb-2 uppercase tracking-wide text-[10px]">Corridor Status</div>
+      <p class="text-slate-500 flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-500"></span>Normal Operations</p>
+      <p class="text-slate-400 mt-1">99.2% on-time · 14 GPS feeds active</p>
+    </div>
+  </div>
+  <div class="border-t border-slate-100 py-3 text-center text-[11px] text-slate-400">&copy; 2026 AutoRoute Transit Mesh &middot; Demo prototype, not affiliated with any transit authority</div>
+</footer>
+
+
+</div>
+<script src="js/autoroute-desktop.js"></script>
+</body>
+</html>

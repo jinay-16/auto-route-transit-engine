@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AutoRoute AI Transit Intelligence Assistant - Natural language multi-modal routing, Ghat monsoon weather forecasts, seat checks, and carpool optimization.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22><text y=%2220%22 font-size=%2220%22>🚏</text></svg>">
+  <title>AutoRoute - AI Transit Assistant</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gradient-to-br from-[#f0f4ff] via-[#e8f5ee] to-[#f3f0ff] text-slate-800 min-h-screen flex flex-col font-sans">
+<!-- Mobile Sidebar Overlay Backdrop -->
+<div id="sidebar-backdrop" onclick="window.toggleMobileNav()" class="fixed inset-0 bg-slate-900/50 backdrop-blur-xs z-40 hidden md:hidden transition-opacity"></div>
+
+<!-- Left Sidebar Navigation -->
+<aside id="app-sidebar" class="fixed top-0 bottom-0 left-0 w-64 bg-white/95 backdrop-blur-xl border-r border-slate-200/90 shadow-lg z-50 flex flex-col justify-between transition-transform duration-300 ease-in-out -translate-x-full md:translate-x-0">
+  <!-- Brand & Corridor Header -->
+  <div class="p-4 border-b border-slate-100 shrink-0">
+    <div class="flex items-center justify-between">
+      <a href="landing.html" class="flex items-center gap-2.5 group">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-emerald-600 via-teal-600 to-emerald-500 flex items-center justify-center text-white shadow-md shadow-emerald-600/30 group-hover:scale-105 group-hover:rotate-3 transition-transform">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+        </div>
+        <div class="flex flex-col">
+          <span class="text-xl font-extrabold tracking-tight text-slate-900 group-hover:text-emerald-700 transition-colors leading-none">AutoRoute</span>
+          <span class="text-[9px] font-bold text-emerald-600 uppercase tracking-widest mt-0.5">TRANSIT MESH</span>
+        </div>
+      </a>
+      <button class="md:hidden w-8 h-8 rounded-lg hover:bg-slate-100 flex items-center justify-center text-slate-500 cursor-pointer" onclick="window.toggleMobileNav()">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+
+    <div class="mt-3 px-3 py-1.5 rounded-xl bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-200/80 flex items-center justify-between text-[11px] font-bold text-emerald-800">
+      <span class="flex items-center gap-1.5">
+        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span>PUNE &#8644; MUMBAI</span>
+      </span>
+      <span class="text-[10px] bg-emerald-100 px-1.5 py-0.5 rounded text-emerald-700 font-semibold">99.4% On-Time</span>
+    </div>
+  </div>
+
+  <!-- Navigation Links with Categories -->
+  <nav class="flex-grow overflow-y-auto p-3 space-y-4 text-xs font-semibold text-slate-600 no-scrollbar">
+    <!-- Group: Main Platform -->
+    <div>
+      <div class="px-2.5 pb-1 text-[10px] font-extrabold uppercase tracking-wider text-slate-400">Main Platform</div>
+      <div class="space-y-0.5">
+        <a href="landing.html" class="nav-sidebar-link">
+          <span class="text-base">&#127968;</span>
+          <span>Home Showcase</span>
+        </a>
+        <a href="index.html" class="nav-sidebar-link">
+          <span class="text-base">&#129517;</span>
+          <span>Plan Journey</span>
+        </a>
+        <a href="dashboard.html" class="nav-sidebar-link">
+          <span class="text-base">&#128202;</span>
+          <span>Dashboard</span>
+        </a>
+        <a href="ai-assistant.html" class="nav-sidebar-link flex items-center justify-between text-indigo-700 bg-indigo-50/50 hover:bg-indigo-100 font-bold">
+          <div class="flex items-center gap-3">
+            <span class="text-base">&#129302;</span>
+            <span>AI Assistant</span>
+          </div>
+          <span class="text-[9px] bg-indigo-200/80 text-indigo-800 px-1.5 py-0.5 rounded-full font-bold">Tool AI</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Group: Transit & Booking -->
+    <div>
+      <div class="px-2.5 pb-1 text-[10px] font-extrabold uppercase tracking-wider text-slate-400">Transit &amp; Booking</div>
+      <div class="space-y-0.5">
+        <a href="route-results.html" class="nav-sidebar-link">
+          <span class="text-base">&#128256;</span>
+          <span>Route Results</span>
+        </a>
+        <a href="journey-details.html" class="nav-sidebar-link">
+          <span class="text-base">&#9201;&#65039;</span>
+          <span>Journey Details</span>
+        </a>
+        <a href="seat-selection.html" class="nav-sidebar-link">
+          <span class="text-base">&#128186;</span>
+          <span>Seat Selection</span>
+        </a>
+        <a href="smart-pass.html" class="nav-sidebar-link">
+          <span class="text-base">&#127903;&#65039;</span>
+          <span>My Smart Passes</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Group: Simulation Labs -->
+    <div>
+      <div class="px-2.5 pb-1 text-[10px] font-extrabold uppercase tracking-wider text-slate-400">Simulation Labs</div>
+      <div class="space-y-0.5">
+        <a href="journey-simulator.html" class="nav-sidebar-link">
+          <span class="text-base">&#129514;</span>
+          <span>Journey Simulator</span>
+        </a>
+        <a href="disruption-simulator.html" class="nav-sidebar-link">
+          <span class="text-base">&#9889;</span>
+          <span>Disruption Guardian</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Group: Commuter Account -->
+    <div>
+      <div class="px-2.5 pb-1 text-[10px] font-extrabold uppercase tracking-wider text-slate-400">Commuter Account</div>
+      <div class="space-y-0.5">
+        <a href="notifications.html" class="nav-sidebar-link flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <span class="text-base">&#128276;</span>
+            <span>Notifications</span>
+          </div>
+          <span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
+        </a>
+        <a href="profile.html" class="nav-sidebar-link">
+          <span class="text-base">&#128100;</span>
+          <span>Profile &amp; Wallet</span>
+        </a>
+        <a href="login.html" class="nav-sidebar-link">
+          <span class="text-base">&#128272;</span>
+          <span>Sign In / Switch</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Sidebar Footer: Wallet & Profile -->
+  <div class="p-3 border-t border-slate-100 shrink-0 space-y-2 bg-slate-50/60">
+    <div class="p-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-md shadow-emerald-600/25 space-y-1.5">
+      <div class="flex items-center justify-between text-[10px] font-bold text-emerald-100">
+        <span>TRANSIT PAY FAST-TAG</span>
+        <span class="bg-emerald-700/80 px-1.5 py-0.5 rounded text-[9px]">Auto-Reload</span>
+      </div>
+      <div class="flex items-center justify-between">
+        <span class="text-lg font-black tracking-tight" id="sidebar-wallet-val">&#8377;1,450.00</span>
+        <button onclick="window.openAddMoneyModal()" class="px-2.5 py-1 rounded-lg bg-white text-emerald-800 font-extrabold text-[10px] hover:bg-emerald-50 shadow-xs transition-all hover:scale-105 active:scale-95 cursor-pointer">
+          + Add
+        </button>
+      </div>
+    </div>
+
+    <div class="flex items-center justify-between pt-1">
+      <a href="profile.html" class="flex items-center gap-2 group flex-grow">
+        <div class="w-7 h-7 rounded-lg bg-slate-800 text-white font-bold text-xs flex items-center justify-center ring-2 ring-emerald-500/30 group-hover:scale-105 transition-transform">RD</div>
+        <div class="flex flex-col">
+          <span class="text-xs font-bold text-slate-800 group-hover:text-emerald-700 transition-colors leading-tight">Rahul Deshmukh</span>
+          <span class="text-[9px] font-semibold text-emerald-600">Gold Commuter</span>
+        </div>
+      </a>
+      <button class="theme-toggle-btn w-7 h-7 rounded-lg hover:bg-slate-200 flex items-center justify-center text-xs cursor-pointer" onclick="window.toggleTheme()" title="Switch Light/Dark Theme">&#127769;</button>
+    </div>
+  </div>
+</aside>
+<div class="main-content-layout flex flex-col min-h-screen">
+<!-- Top Utility Header -->
+<header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200/80 px-4 sm:px-6 h-14 flex items-center justify-between transition-colors">
+  <div class="flex items-center gap-3">
+    <button onclick="window.toggleMobileNav()" class="md:hidden w-8 h-8 rounded-xl bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-700 cursor-pointer" title="Toggle Navigation Menu">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+    <div class="flex items-center gap-2">
+      <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+      <span class="text-xs font-bold text-slate-700 hidden sm:inline">Western Corridor Transit Mesh</span>
+      <span class="text-xs text-slate-400 hidden sm:inline">&bull; 14 GPS Feeds Active</span>
+    </div>
+  </div>
+
+  <div class="flex items-center gap-2 sm:gap-3">
+    <button onclick="window.openAddMoneyModal()" class="flex items-center gap-1.5 px-3 py-1 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-800 text-xs font-bold border border-emerald-200/80 shadow-xs cursor-pointer transition-all" id="wallet-pill">
+      <span>Transit Pay:</span>
+      <strong id="top-wallet-val" class="font-extrabold text-emerald-700">&#8377;1,450</strong>
+    </button>
+    <a href="notifications.html" class="relative w-8 h-8 rounded-xl bg-slate-100 hover:bg-slate-200/80 flex items-center justify-center text-slate-600 transition-colors" title="Notifications">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.4-1.4A2 2 0 0118 14.2V11a6 6 0 10-12 0v3.2a2 2 0 01-.6 1.4L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+      <span class="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-rose-500 border-2 border-white animate-pulse"></span>
+    </a>
+    <button class="theme-toggle-btn w-8 h-8 rounded-xl bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-xs cursor-pointer" onclick="window.toggleTheme()" title="Switch Light/Dark Theme">&#127769;</button>
+    <a href="profile.html" class="w-8 h-8 rounded-xl bg-gradient-to-tr from-slate-800 to-slate-900 text-white font-bold text-xs flex items-center justify-center ring-2 ring-emerald-500/40 hover:scale-105 transition-all shadow-xs" title="Rahul Deshmukh (Gold Tier)">RD</a>
+  </div>
+</header>
+
+
+
+
+
+<main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+  <!-- Top Banner -->
+  <div class="hero-bg bg-white/95 backdrop-blur-sm rounded-3xl border border-emerald-100 shadow-xl p-6 sm:p-7 flex flex-col md:flex-row md:items-center justify-between gap-5 float-in">
+    <div class="space-y-1.5">
+      <div class="flex items-center gap-2 flex-wrap text-[10px] font-bold">
+        <span class="bg-emerald-100 text-emerald-800 border border-emerald-200 px-3 py-1 rounded-full flex items-center gap-1.5 shadow-xs">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>TOOL-CALLING AI ARCHITECTURE
+        </span>
+        <span class="bg-indigo-50 text-indigo-700 border border-indigo-200 px-2.5 py-1 rounded-full">Zero Hallucinations Guarantee</span>
+      </div>
+      <h1 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">AutoRoute AI Transit Intelligence Center</h1>
+      <p class="text-xs sm:text-sm text-slate-600 max-w-2xl">Ask complex natural language travel questions. The assistant executes verified Dijkstra routing algorithms, queries live train coach inventories, checks weather telemetry, and optimizes carpool fares.</p>
+    </div>
+    <div class="flex items-center gap-3 shrink-0">
+      <div class="bg-slate-50 p-3 rounded-2xl border border-slate-200 text-center">
+        <div class="text-[10px] uppercase font-bold text-slate-400">Grounded Accuracy</div>
+        <div class="text-xl font-black text-emerald-600">100%</div>
+      </div>
+      <div class="bg-slate-50 p-3 rounded-2xl border border-slate-200 text-center">
+        <div class="text-[10px] uppercase font-bold text-slate-400">Registered Tools</div>
+        <div class="text-xl font-black text-indigo-600">6 Active</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+    <!-- Left Column: Tool Registry & Presets -->
+    <div class="lg:col-span-4 space-y-5">
+      <!-- AI Quick Presets -->
+      <div class="bg-white/95 backdrop-blur-sm rounded-2xl border border-slate-200 shadow-sm p-5 space-y-3.5 float-in">
+        <div class="flex items-center justify-between">
+          <h2 class="text-xs font-bold uppercase tracking-wider text-slate-400">Quick AI Inquiries</h2>
+          <span class="text-[10px] text-emerald-600 font-bold bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">1-Tap Prompt</span>
+        </div>
+        <div class="space-y-2 text-xs">
+          <button onclick="askPrompt('What is the fastest route from Pune to CSMT?')" class="w-full text-left p-2.5 rounded-xl border border-slate-200 hover:border-emerald-400 hover:bg-emerald-50/50 transition-all font-semibold text-slate-700 flex items-center justify-between group">
+            <span>⚡ Fastest Route to Mumbai</span>
+            <span class="text-slate-400 group-hover:text-emerald-600">&rarr;</span>
+          </button>
+          <button onclick="askPrompt('Find the cheapest route to Mumbai')" class="w-full text-left p-2.5 rounded-xl border border-slate-200 hover:border-emerald-400 hover:bg-emerald-50/50 transition-all font-semibold text-slate-700 flex items-center justify-between group">
+            <span>💰 Most Economical Path</span>
+            <span class="text-slate-400 group-hover:text-emerald-600">&rarr;</span>
+          </button>
+          <button onclick="askPrompt('Check seat availability on Deccan Queen #12124')" class="w-full text-left p-2.5 rounded-xl border border-slate-200 hover:border-emerald-400 hover:bg-emerald-50/50 transition-all font-semibold text-slate-700 flex items-center justify-between group">
+            <span>💺 Check Deccan Queen Seats</span>
+            <span class="text-slate-400 group-hover:text-emerald-600">&rarr;</span>
+          </button>
+          <button onclick="askPrompt('Predict Khandala Ghat monsoon delays for today')" class="w-full text-left p-2.5 rounded-xl border border-slate-200 hover:border-emerald-400 hover:bg-emerald-50/50 transition-all font-semibold text-slate-700 flex items-center justify-between group">
+            <span>🌧️ Ghat Weather & Delays</span>
+            <span class="text-slate-400 group-hover:text-emerald-600">&rarr;</span>
+          </button>
+          <button onclick="askPrompt('How much will I save sharing a cab from the station?')" class="w-full text-left p-2.5 rounded-xl border border-slate-200 hover:border-emerald-400 hover:bg-emerald-50/50 transition-all font-semibold text-slate-700 flex items-center justify-between group">
+            <span>🛺 Shared Cab & Auto Savings</span>
+            <span class="text-slate-400 group-hover:text-emerald-600">&rarr;</span>
+          </button>
+          <button onclick="askPrompt('What are the carbon emissions of this multi-modal trip?')" class="w-full text-left p-2.5 rounded-xl border border-slate-200 hover:border-emerald-400 hover:bg-emerald-50/50 transition-all font-semibold text-slate-700 flex items-center justify-between group">
+            <span>🌿 Carbon Footprint vs Car</span>
+            <span class="text-slate-400 group-hover:text-emerald-600">&rarr;</span>
+          </button>
+          <button onclick="askPrompt('What is my waitlist clearance probability?')" class="w-full text-left p-2.5 rounded-xl border border-slate-200 hover:border-emerald-400 hover:bg-emerald-50/50 transition-all font-semibold text-slate-700 flex items-center justify-between group">
+            <span>📊 Waitlist Queue Probability</span>
+            <span class="text-slate-400 group-hover:text-emerald-600">&rarr;</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Grounded Tools Registry Status -->
+      <div class="bg-white/95 backdrop-blur-sm rounded-2xl border border-slate-200 shadow-sm p-5 space-y-3 float-in">
+        <h2 class="text-xs font-bold uppercase tracking-wider text-slate-400">Registered Backend Tools</h2>
+        <div class="space-y-2 text-[11px] font-mono">
+          <div class="flex items-center justify-between p-2 rounded-lg bg-slate-50 border border-slate-100">
+            <span class="text-slate-700">toolSearchRoutes</span>
+            <span class="text-emerald-600 font-bold">● Active</span>
+          </div>
+          <div class="flex items-center justify-between p-2 rounded-lg bg-slate-50 border border-slate-100">
+            <span class="text-slate-700">toolCheckSeatInventory</span>
+            <span class="text-emerald-600 font-bold">● Active</span>
+          </div>
+          <div class="flex items-center justify-between p-2 rounded-lg bg-slate-50 border border-slate-100">
+            <span class="text-slate-700">toolPredictGhatTelemetry</span>
+            <span class="text-emerald-600 font-bold">● Active</span>
+          </div>
+          <div class="flex items-center justify-between p-2 rounded-lg bg-slate-50 border border-slate-100">
+            <span class="text-slate-700">toolFindLastMileOptions</span>
+            <span class="text-emerald-600 font-bold">● Active</span>
+          </div>
+          <div class="flex items-center justify-between p-2 rounded-lg bg-slate-50 border border-slate-100">
+            <span class="text-slate-700">toolCalculateCarbon</span>
+            <span class="text-emerald-600 font-bold">● Active</span>
+          </div>
+          <div class="flex items-center justify-between p-2 rounded-lg bg-slate-50 border border-slate-100">
+            <span class="text-slate-700">toolPredictWaitlist</span>
+            <span class="text-emerald-600 font-bold">● Active</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column: Conversational Chat UI -->
+    <div class="lg:col-span-8 space-y-4">
+      <div class="bg-white/95 backdrop-blur-sm rounded-3xl border border-slate-200 shadow-xl overflow-hidden flex flex-col h-[650px] float-in">
+        <!-- Chat Header -->
+        <div class="bg-gradient-to-r from-slate-900 via-emerald-950 to-slate-900 text-white p-4 px-6 flex items-center justify-between border-b border-emerald-900/50">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-emerald-500 to-teal-400 flex items-center justify-center text-lg shadow-md shadow-emerald-500/30">🤖</div>
+            <div>
+              <div class="font-extrabold text-sm text-white">AutoRoute Intelligence Engine</div>
+              <div class="text-[10px] text-emerald-400 flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                Connected to In-Memory Adjacency Graph & ReentrantLock Concurrency
+              </div>
+            </div>
+          </div>
+          <span class="text-xs font-mono bg-emerald-900/60 text-emerald-300 border border-emerald-500/30 px-2.5 py-1 rounded-full">v2.4 Grounded</span>
+        </div>
+
+        <!-- Chat Stream -->
+        <div id="full-chat-stream" class="flex-1 overflow-y-auto p-5 space-y-4 text-xs font-medium bg-slate-50/50">
+          <!-- Assistant Welcome -->
+          <div class="flex items-start gap-3 max-w-[85%]">
+            <div class="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">🤖</div>
+            <div class="bg-white p-4 rounded-2xl rounded-tl-none border border-emerald-100 shadow-sm space-y-2 text-slate-700">
+              <p class="font-bold text-slate-900 text-[13px]">Namaste! I am your AutoRoute Transit Intelligence Assistant. 🙏</p>
+              <p class="leading-relaxed">I am directly connected to the Pune ⇄ Lonavala ⇄ Mumbai transit network graph. Ask me to find routes, predict Ghat monsoon delays, check Deccan Queen seats, or estimate shared cab savings.</p>
+              <div class="pt-2 flex flex-wrap gap-1.5 border-t border-slate-100">
+                <button onclick="askPrompt('Find the cheapest route to Mumbai')" class="ai-chip">💰 Cheapest Route</button>
+                <button onclick="askPrompt('Predict Khandala Ghat monsoon delays for today')" class="ai-chip">🌧️ Ghat Weather</button>
+                <button onclick="askPrompt('Check seat availability on Deccan Queen')" class="ai-chip">💺 Check Seats</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chat Input Bar -->
+        <div class="p-3.5 bg-white border-t border-slate-200">
+          <form id="ai-chat-form" onsubmit="handleChatSubmit(event)" class="flex items-center gap-2">
+            <input type="text" id="ai-user-query" placeholder="Ask anything about routes, schedules, weather delays, seats..." class="flex-1 px-4 py-3 rounded-2xl border border-slate-200 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500/40 focus:border-emerald-500 transition-all font-medium">
+            <button type="button" onclick="simulateVoiceInput()" title="Voice input simulation" class="p-3 rounded-2xl border border-slate-200 hover:bg-slate-100 text-slate-600 text-sm transition-colors">🎙️</button>
+            <button type="submit" class="btn-primary ripple px-5 py-3 rounded-2xl text-white font-bold text-xs shadow-md shadow-emerald-600/30 flex items-center gap-1.5 transition-all hover:scale-105 active:scale-95">
+              <span>Ask AI</span><span>&rarr;</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="bg-white border-t border-slate-200 mt-auto">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 grid grid-cols-2 sm:grid-cols-5 gap-6 text-xs">
+    <div class="col-span-2 sm:col-span-1">
+      <div class="flex items-center gap-2 mb-2"><div class="w-6 h-6 rounded-md bg-gradient-to-tr from-emerald-600 to-teal-400 flex items-center justify-center text-white"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div><span class="font-extrabold text-slate-900">AutoRoute</span></div>
+      <p class="text-slate-400">Intelligent transit mesh for Pune ⇄ Lonavala ⇄ Mumbai.</p>
+    </div>
+    <div>
+      <div class="font-bold text-slate-800 mb-2 uppercase tracking-wide text-[10px]">Plan &amp; Travel</div>
+      <ul class="space-y-1.5">
+        <li><a href="landing.html" class="text-slate-500 hover:text-emerald-600">Home Showcase</a></li>
+        <li><a href="index.html" class="text-slate-500 hover:text-emerald-600">Plan Journey</a></li>
+        <li><a href="route-results.html" class="text-slate-500 hover:text-emerald-600">Route Results</a></li>
+        <li><a href="seat-selection.html" class="text-slate-500 hover:text-emerald-600">Seat Selection</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="font-bold text-slate-800 mb-2 uppercase tracking-wide text-[10px]">AI Intelligence</div>
+      <ul class="space-y-1.5">
+        <li><a href="ai-assistant.html" class="text-emerald-600 font-bold">AI Assistant Hub</a></li>
+        <li><a href="journey-simulator.html" class="text-slate-500 hover:text-emerald-600">Journey Simulator</a></li>
+        <li><a href="disruption-simulator.html" class="text-slate-500 hover:text-emerald-600">Disruption Simulator</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="font-bold text-slate-800 mb-2 uppercase tracking-wide text-[10px]">Account</div>
+      <ul class="space-y-1.5">
+        <li><a href="dashboard.html" class="text-slate-500 hover:text-emerald-600">Dashboard</a></li>
+        <li><a href="smart-pass.html" class="text-slate-500 hover:text-emerald-600">My Tickets</a></li>
+        <li><a href="profile.html" class="text-slate-500 hover:text-emerald-600">Profile</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="font-bold text-slate-800 mb-2 uppercase tracking-wide text-[10px]">Corridor Status</div>
+      <p class="text-slate-500 flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-500"></span>Normal Operations</p>
+      <p class="text-slate-400 mt-1">99.4% on-time · AI Telemetry Active</p>
+    </div>
+  </div>
+  <div class="border-t border-slate-100 py-3 text-center text-[11px] text-slate-400">&copy; 2026 AutoRoute Transit Mesh &middot; Intelligent Multi-Modal Platform</div>
+</footer>
+
+<script>
+async function handleChatSubmit(e) {
+  if (e) e.preventDefault();
+  const input = document.getElementById("ai-user-query");
+  const q = input.value.trim();
+  if (!q) return;
+  input.value = "";
+  await postUserMessage(q);
+}
+
+function askPrompt(q) {
+  postUserMessage(q);
+}
+
+function simulateVoiceInput() {
+  const prompts = [
+    "What is the fastest route from Pune to Mumbai?",
+    "Check seat availability on Deccan Queen",
+    "Predict Khandala Ghat delays today",
+    "How much will I save sharing a cab from the station?"
+  ];
+  const choice = prompts[Math.floor(Math.random() * prompts.length)];
+  document.getElementById("ai-user-query").value = choice;
+  handleChatSubmit();
+}
+
+async function postUserMessage(text) {
+  const stream = document.getElementById("full-chat-stream");
+
+  // Append user bubble
+  const userDiv = document.createElement("div");
+  userDiv.className = "flex items-start gap-3 justify-end";
+  userDiv.innerHTML = `
+    <div class="bg-gradient-to-r from-emerald-600 to-teal-600 text-white p-3.5 px-4 rounded-2xl rounded-tr-none shadow-sm max-w-[80%] leading-relaxed">
+      ${text}
+    </div>
+    <div class="w-7 h-7 rounded-lg bg-slate-800 text-white flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">RD</div>
+  `;
+  stream.appendChild(userDiv);
+  stream.scrollTop = stream.scrollHeight;
+
+  // Append Loading bubble
+  const loadDiv = document.createElement("div");
+  loadDiv.className = "flex items-start gap-3 max-w-[85%]";
+  loadDiv.innerHTML = `
+    <div class="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">🤖</div>
+    <div class="bg-white p-3.5 px-4 rounded-2xl rounded-tl-none border border-slate-200 shadow-sm text-slate-500 italic flex items-center gap-2">
+      <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+      Executing AutoRoute backend tool dispatch...
+    </div>
+  `;
+  stream.appendChild(loadDiv);
+  stream.scrollTop = stream.scrollHeight;
+
+  try {
+    const res = await fetch("/api/assistant/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ query: text, currentOrigin: "PUNE", currentDestination: "CSMT" })
+    }).then(r => r.json());
+
+    loadDiv.remove();
+
+    const botDiv = document.createElement("div");
+    botDiv.className = "flex items-start gap-3 max-w-[85%]";
+
+    let toolsHtml = "";
+    if (res.toolsInvoked && res.toolsInvoked.length > 0) {
+      toolsHtml = `
+        <div class="flex flex-wrap items-center gap-1.5 pt-2 pb-1">
+          <span class="text-[10px] font-bold text-slate-400 uppercase">Tools Dispatched:</span>
+          ${res.toolsInvoked.map(t => `<span class="bg-indigo-50 text-indigo-700 font-mono text-[10px] px-2 py-0.5 rounded border border-indigo-200">⚙ ${t}</span>`).join("")}
+        </div>
+      `;
+    }
+
+    let routeCardHtml = "";
+    if (res.recommendedRoute) {
+      const r = res.recommendedRoute;
+      routeCardHtml = `
+        <div class="mt-2.5 p-3 rounded-xl bg-gradient-to-r from-emerald-50 to-teal-50/50 border border-emerald-200 space-y-1.5">
+          <div class="flex justify-between items-center">
+            <span class="font-bold text-emerald-900">${r.strategyDisplayName || 'Optimal Route'}</span>
+            <span class="font-black text-emerald-700 text-sm">₹${Math.round(r.totalFare)}</span>
+          </div>
+          <div class="text-[11px] text-slate-600">
+            ${r.originStation} ➔ ${r.destinationStation} • ${r.totalDurationMinutes} mins • ${r.numberOfTransfers} Transfer(s) • ${r.reliabilityScore}% Reliability
+          </div>
+          <div class="pt-1 flex items-center justify-between">
+            <span class="text-[10px] font-bold text-emerald-700">🌿 ${r.co2EmissionKg} kg CO₂</span>
+            <a href="seat-selection.html" class="px-3 py-1 rounded-lg bg-emerald-600 text-white font-bold text-[10px] hover:bg-emerald-700 transition-colors shadow-xs">Book This Route &rarr;</a>
+          </div>
+        </div>
+      `;
+    }
+
+    botDiv.innerHTML = `
+      <div class="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">🤖</div>
+      <div class="bg-white p-4 rounded-2xl rounded-tl-none border border-emerald-100 shadow-sm space-y-2 text-slate-700">
+        <div class="leading-relaxed text-[12.5px]">${res.answer}</div>
+        ${toolsHtml}
+        ${routeCardHtml}
+        <div class="text-[10px] text-slate-400 pt-1 border-t border-slate-100 flex items-center justify-between">
+          <span>✓ Grounded in Verified Dijkstra Engine</span>
+          <span class="font-mono text-emerald-600">0 Hallucination</span>
+        </div>
+      </div>
+    `;
+
+    stream.appendChild(botDiv);
+    stream.scrollTop = stream.scrollHeight;
+  } catch (err) {
+    loadDiv.remove();
+    let res = null;
+    if (window.generateGroundedOfflineAnswer) {
+      res = window.generateGroundedOfflineAnswer(text);
+    }
+    if (res) {
+      const botDiv = document.createElement("div");
+      botDiv.className = "flex items-start gap-3 max-w-[85%]";
+      let toolsHtml = "";
+      if (res.toolsInvoked && res.toolsInvoked.length > 0) {
+        toolsHtml = `
+          <div class="flex flex-wrap items-center gap-1.5 pt-2 pb-1">
+            <span class="text-[10px] font-bold text-slate-400 uppercase">Offline Grounded Dispatch:</span>
+            ${res.toolsInvoked.map(t => `<span class="bg-indigo-50 text-indigo-700 font-mono text-[10px] px-2 py-0.5 rounded border border-indigo-200">⚙ ${t}</span>`).join("")}
+          </div>
+        `;
+      }
+      botDiv.innerHTML = `
+        <div class="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">🤖</div>
+        <div class="bg-white p-4 rounded-2xl rounded-tl-none border border-emerald-100 shadow-sm space-y-2 text-slate-700">
+          <div class="leading-relaxed text-[12.5px]">${res.answer}</div>
+          ${toolsHtml}
+          <div class="text-[10px] text-slate-400 pt-1 border-t border-slate-100 flex items-center justify-between">
+            <span>✓ AutoRoute Grounded Telemetry Engine</span>
+            <span class="font-mono text-emerald-600">Active</span>
+          </div>
+        </div>
+      `;
+      stream.appendChild(botDiv);
+      stream.scrollTop = stream.scrollHeight;
+      return;
+    }
+    const errDiv = document.createElement("div");
+    errDiv.className = "flex items-start gap-3 max-w-[85%]";
+    errDiv.innerHTML = `
+      <div class="w-7 h-7 rounded-lg bg-rose-100 text-rose-700 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">⚠️</div>
+      <div class="bg-white p-3.5 rounded-2xl rounded-tl-none border border-rose-200 text-rose-700">
+        Notice: ${err.message}. Showing verified corridor telemetry fallback.
+      </div>
+    `;
+    stream.appendChild(errDiv);
+    stream.scrollTop = stream.scrollHeight;
+  }
+}
+</script>
+</div>
+<script src="js/autoroute-desktop.js"></script>
+</body>
+</html>

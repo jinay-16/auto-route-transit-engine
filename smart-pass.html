@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Your AutoRoute digital pass and ticket history for the Pune-Lonavala-Mumbai corridor.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22><text y=%2220%22 font-size=%2220%22>🚏</text></svg>">
+  <title>AutoRoute - Multi-Modal Smart Pass</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gradient-to-br from-[#f0f4ff] via-[#e8f5ee] to-[#f3f0ff] text-slate-800 min-h-screen flex flex-col font-sans">
+<!-- Mobile Sidebar Overlay Backdrop -->
+<div id="sidebar-backdrop" onclick="window.toggleMobileNav()" class="fixed inset-0 bg-slate-900/50 backdrop-blur-xs z-40 hidden md:hidden transition-opacity"></div>
+
+<!-- Left Sidebar Navigation -->
+<aside id="app-sidebar" class="fixed top-0 bottom-0 left-0 w-64 bg-white/95 backdrop-blur-xl border-r border-slate-200/90 shadow-lg z-50 flex flex-col justify-between transition-transform duration-300 ease-in-out -translate-x-full md:translate-x-0">
+  <!-- Brand & Corridor Header -->
+  <div class="p-4 border-b border-slate-100 shrink-0">
+    <div class="flex items-center justify-between">
+      <a href="landing.html" class="flex items-center gap-2.5 group">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-emerald-600 via-teal-600 to-emerald-500 flex items-center justify-center text-white shadow-md shadow-emerald-600/30 group-hover:scale-105 group-hover:rotate-3 transition-transform">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+        </div>
+        <div class="flex flex-col">
+          <span class="text-xl font-extrabold tracking-tight text-slate-900 group-hover:text-emerald-700 transition-colors leading-none">AutoRoute</span>
+          <span class="text-[9px] font-bold text-emerald-600 uppercase tracking-widest mt-0.5">TRANSIT MESH</span>
+        </div>
+      </a>
+      <button class="md:hidden w-8 h-8 rounded-lg hover:bg-slate-100 flex items-center justify-center text-slate-500 cursor-pointer" onclick="window.toggleMobileNav()">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+
+    <div class="mt-3 px-3 py-1.5 rounded-xl bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-200/80 flex items-center justify-between text-[11px] font-bold text-emerald-800">
+      <span class="flex items-center gap-1.5">
+        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span>PUNE &#8644; MUMBAI</span>
+      </span>
+      <span class="text-[10px] bg-emerald-100 px-1.5 py-0.5 rounded text-emerald-700 font-semibold">99.4% On-Time</span>
+    </div>
+  </div>
+
+  <!-- Navigation Links with Categories -->
+  <nav class="flex-grow overflow-y-auto p-3 space-y-4 text-xs font-semibold text-slate-600 no-scrollbar">
+    <!-- Group: Main Platform -->
+    <div>
+      <div class="px-2.5 pb-1 text-[10px] font-extrabold uppercase tracking-wider text-slate-400">Main Platform</div>
+      <div class="space-y-0.5">
+        <a href="landing.html" class="nav-sidebar-link">
+          <span class="text-base">&#127968;</span>
+          <span>Home Showcase</span>
+        </a>
+        <a href="index.html" class="nav-sidebar-link">
+          <span class="text-base">&#129517;</span>
+          <span>Plan Journey</span>
+        </a>
+        <a href="dashboard.html" class="nav-sidebar-link">
+          <span class="text-base">&#128202;</span>
+          <span>Dashboard</span>
+        </a>
+        <a href="ai-assistant.html" class="nav-sidebar-link flex items-center justify-between text-indigo-700 bg-indigo-50/50 hover:bg-indigo-100 font-bold">
+          <div class="flex items-center gap-3">
+            <span class="text-base">&#129302;</span>
+            <span>AI Assistant</span>
+          </div>
+          <span class="text-[9px] bg-indigo-200/80 text-indigo-800 px-1.5 py-0.5 rounded-full font-bold">Tool AI</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Group: Transit & Booking -->
+    <div>
+      <div class="px-2.5 pb-1 text-[10px] font-extrabold uppercase tracking-wider text-slate-400">Transit &amp; Booking</div>
+      <div class="space-y-0.5">
+        <a href="route-results.html" class="nav-sidebar-link">
+          <span class="text-base">&#128256;</span>
+          <span>Route Results</span>
+        </a>
+        <a href="journey-details.html" class="nav-sidebar-link">
+          <span class="text-base">&#9201;&#65039;</span>
+          <span>Journey Details</span>
+        </a>
+        <a href="seat-selection.html" class="nav-sidebar-link">
+          <span class="text-base">&#128186;</span>
+          <span>Seat Selection</span>
+        </a>
+        <a href="smart-pass.html" class="nav-sidebar-link">
+          <span class="text-base">&#127903;&#65039;</span>
+          <span>My Smart Passes</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Group: Simulation Labs -->
+    <div>
+      <div class="px-2.5 pb-1 text-[10px] font-extrabold uppercase tracking-wider text-slate-400">Simulation Labs</div>
+      <div class="space-y-0.5">
+        <a href="journey-simulator.html" class="nav-sidebar-link">
+          <span class="text-base">&#129514;</span>
+          <span>Journey Simulator</span>
+        </a>
+        <a href="disruption-simulator.html" class="nav-sidebar-link">
+          <span class="text-base">&#9889;</span>
+          <span>Disruption Guardian</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Group: Commuter Account -->
+    <div>
+      <div class="px-2.5 pb-1 text-[10px] font-extrabold uppercase tracking-wider text-slate-400">Commuter Account</div>
+      <div class="space-y-0.5">
+        <a href="notifications.html" class="nav-sidebar-link flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <span class="text-base">&#128276;</span>
+            <span>Notifications</span>
+          </div>
+          <span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
+        </a>
+        <a href="profile.html" class="nav-sidebar-link">
+          <span class="text-base">&#128100;</span>
+          <span>Profile &amp; Wallet</span>
+        </a>
+        <a href="login.html" class="nav-sidebar-link">
+          <span class="text-base">&#128272;</span>
+          <span>Sign In / Switch</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Sidebar Footer: Wallet & Profile -->
+  <div class="p-3 border-t border-slate-100 shrink-0 space-y-2 bg-slate-50/60">
+    <div class="p-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-md shadow-emerald-600/25 space-y-1.5">
+      <div class="flex items-center justify-between text-[10px] font-bold text-emerald-100">
+        <span>TRANSIT PAY FAST-TAG</span>
+        <span class="bg-emerald-700/80 px-1.5 py-0.5 rounded text-[9px]">Auto-Reload</span>
+      </div>
+      <div class="flex items-center justify-between">
+        <span class="text-lg font-black tracking-tight" id="sidebar-wallet-val">&#8377;1,450.00</span>
+        <button onclick="window.openAddMoneyModal()" class="px-2.5 py-1 rounded-lg bg-white text-emerald-800 font-extrabold text-[10px] hover:bg-emerald-50 shadow-xs transition-all hover:scale-105 active:scale-95 cursor-pointer">
+          + Add
+        </button>
+      </div>
+    </div>
+
+    <div class="flex items-center justify-between pt-1">
+      <a href="profile.html" class="flex items-center gap-2 group flex-grow">
+        <div class="w-7 h-7 rounded-lg bg-slate-800 text-white font-bold text-xs flex items-center justify-center ring-2 ring-emerald-500/30 group-hover:scale-105 transition-transform">RD</div>
+        <div class="flex flex-col">
+          <span class="text-xs font-bold text-slate-800 group-hover:text-emerald-700 transition-colors leading-tight">Rahul Deshmukh</span>
+          <span class="text-[9px] font-semibold text-emerald-600">Gold Commuter</span>
+        </div>
+      </a>
+      <button class="theme-toggle-btn w-7 h-7 rounded-lg hover:bg-slate-200 flex items-center justify-center text-xs cursor-pointer" onclick="window.toggleTheme()" title="Switch Light/Dark Theme">&#127769;</button>
+    </div>
+  </div>
+</aside>
+<div class="main-content-layout flex flex-col min-h-screen">
+<!-- Top Utility Header -->
+<header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200/80 px-4 sm:px-6 h-14 flex items-center justify-between transition-colors">
+  <div class="flex items-center gap-3">
+    <button onclick="window.toggleMobileNav()" class="md:hidden w-8 h-8 rounded-xl bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-700 cursor-pointer" title="Toggle Navigation Menu">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+    <div class="flex items-center gap-2">
+      <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+      <span class="text-xs font-bold text-slate-700 hidden sm:inline">Western Corridor Transit Mesh</span>
+      <span class="text-xs text-slate-400 hidden sm:inline">&bull; 14 GPS Feeds Active</span>
+    </div>
+  </div>
+
+  <div class="flex items-center gap-2 sm:gap-3">
+    <button onclick="window.openAddMoneyModal()" class="flex items-center gap-1.5 px-3 py-1 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-800 text-xs font-bold border border-emerald-200/80 shadow-xs cursor-pointer transition-all" id="wallet-pill">
+      <span>Transit Pay:</span>
+      <strong id="top-wallet-val" class="font-extrabold text-emerald-700">&#8377;1,450</strong>
+    </button>
+    <a href="notifications.html" class="relative w-8 h-8 rounded-xl bg-slate-100 hover:bg-slate-200/80 flex items-center justify-center text-slate-600 transition-colors" title="Notifications">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.4-1.4A2 2 0 0118 14.2V11a6 6 0 10-12 0v3.2a2 2 0 01-.6 1.4L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+      <span class="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-rose-500 border-2 border-white animate-pulse"></span>
+    </a>
+    <button class="theme-toggle-btn w-8 h-8 rounded-xl bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-xs cursor-pointer" onclick="window.toggleTheme()" title="Switch Light/Dark Theme">&#127769;</button>
+    <a href="profile.html" class="w-8 h-8 rounded-xl bg-gradient-to-tr from-slate-800 to-slate-900 text-white font-bold text-xs flex items-center justify-center ring-2 ring-emerald-500/40 hover:scale-105 transition-all shadow-xs" title="Rahul Deshmukh (Gold Tier)">RD</a>
+  </div>
+</header>
+
+
+
+<main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+  <div class="flex flex-wrap items-center justify-between gap-3">
+    <div class="flex gap-1.5 bg-white p-1 rounded-xl border border-slate-200 text-xs font-bold">
+      <button id="tab-btn-active" onclick="setPassTab('active')" class="px-3.5 py-1.5 rounded-lg bg-slate-100 text-slate-800 flex items-center gap-1.5">Active Passes <span class="px-1.5 py-0.5 rounded-full bg-emerald-100 text-emerald-700 text-[10px]">1</span></button>
+      <button id="tab-btn-history" onclick="setPassTab('history')" class="px-3.5 py-1.5 rounded-lg text-slate-500 hover:text-slate-800 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-slate-300"></span>Booking History</button>
+      <button id="tab-btn-waitlist" onclick="setPassTab('waitlist')" class="px-3.5 py-1.5 rounded-lg text-slate-500 hover:text-slate-800 flex items-center gap-1.5">Waitlist Queue <span class="px-1.5 py-0.5 rounded-full bg-amber-100 text-amber-700 text-[10px]">1</span></button>
+    </div>
+    <button onclick="window.downloadPassPDF()" class="text-xs font-bold text-slate-600 bg-white border border-slate-200 px-3 py-2 rounded-lg flex items-center gap-1.5 hover:bg-slate-50 cursor-pointer shadow-xs">&#8595; Download Statement (PDF/CSV)</button>
+  </div>
+
+  <div id="panel-active">
+  <div class="hero-bg bg-white/95 backdrop-blur-sm rounded-2xl border border-emerald-100 shadow-xl p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 float-in">
+    <div><span class="px-2.5 py-0.5 rounded text-[10px] font-bold bg-gradient-to-r from-emerald-100 to-teal-100 text-emerald-800 border border-emerald-200 uppercase shadow-xs">CONFIRMED &amp; TELEMETRY LINKED</span><h1 class="text-2xl font-black text-slate-900 mt-1">Booking Confirmed! Multi-Modal Pass Ready.</h1></div>
+    <div class="text-right text-xs text-slate-500"><div>MASTER PNR: <strong class="text-slate-800 font-mono font-bold" id="pass-pnr-display">AR-984210-PNQ</strong></div><div>REF ID: #MUM-PUN-8472</div></div>
+  </div>
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start mt-4">
+    <div class="lg:col-span-7 space-y-4">
+      <div class="bg-white/95 backdrop-blur-sm rounded-2xl border-2 border-emerald-500 shadow-xl hover:shadow-2xl p-6 space-y-6 transition-all float-in">
+        <div class="flex justify-between items-center"><div class="text-2xl font-black text-slate-900" id="endpoints-label">Swargate ➔ CSMT</div><div class="text-base font-bold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-lg border border-emerald-200">Today, 24 Oct</div></div>
+        <div class="grid grid-cols-4 gap-2 bg-gradient-to-r from-emerald-50/70 via-teal-50/50 to-indigo-50/50 p-3 rounded-xl border border-emerald-200/60 text-xs">
+          <div><div class="text-[10px] text-slate-500 uppercase font-bold">PASSENGER</div><div class="font-bold text-slate-900 mt-0.5" id="passenger-name-display">Rahul Deshmukh</div></div>
+          <div><div class="text-[10px] text-slate-500 uppercase font-bold">SEAT</div><div class="font-bold text-emerald-700 mt-0.5" id="seat-label">Seat 24W (C3)</div></div>
+          <div><div class="text-[10px] text-slate-500 uppercase font-bold">FARE</div><div class="font-bold text-slate-900 mt-0.5" id="fare-label">₹260.00</div></div>
+          <div><div class="text-[10px] text-slate-500 uppercase font-bold">SECURITY</div><div class="font-bold text-emerald-800 mt-0.5">● Encrypted</div></div>
+        </div>
+
+        <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 text-xs flex justify-between items-center">
+          <div>
+            <div class="text-[10px] font-bold text-slate-400 uppercase">BOARDING STOP</div>
+            <div class="font-bold text-slate-800" id="pass-boarding-display">06:45 AM &bull; Swargate Bus Port (Platform 3)</div>
+          </div>
+          <div class="text-right">
+            <div class="text-[10px] font-bold text-slate-400 uppercase">DROPPING STOP</div>
+            <div class="font-bold text-slate-800" id="pass-dropping-display">10:00 AM &bull; Dadar Asiad Stand (Pritam Hotel)</div>
+          </div>
+        </div>
+        <div class="bg-gradient-to-b from-slate-50 to-emerald-50/30 p-6 rounded-2xl border-2 border-dashed border-emerald-200 text-center space-y-3">
+          <div class="w-48 h-48 mx-auto bg-white p-3 rounded-2xl shadow-lg border-2 border-emerald-300 hover:scale-105 transition-transform flex items-center justify-center" id="qr-box">
+            <svg viewBox="0 0 100 100" class="w-full h-full text-slate-900" fill="currentColor"><rect x="0" y="0" width="30" height="30" rx="4"/><rect x="5" y="5" width="20" height="20" fill="white" rx="2"/><rect x="9" y="9" width="12" height="12" rx="1"/><rect x="70" y="0" width="30" height="30" rx="4"/><rect x="75" y="5" width="20" height="20" fill="white" rx="2"/><rect x="79" y="9" width="12" height="12" rx="1"/><rect x="0" y="70" width="30" height="30" rx="4"/><rect x="5" y="75" width="20" height="20" fill="white" rx="2"/><rect x="9" y="79" width="12" height="12" rx="1"/><rect x="36" y="36" width="28" height="28" fill="#10b981" rx="4"/><circle cx="50" cy="50" r="8" fill="white"/></svg>
+          </div>
+          <div class="text-xs font-bold text-slate-800 flex items-center justify-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>Dynamic QR (Auto-Refreshes in <span id="countdown" class="text-emerald-700 font-mono font-black">30</span>s)</div>
+        </div>
+        <div class="flex items-center justify-between border-t border-slate-100 pt-4 text-xs">
+          <a href="dashboard.html" class="text-emerald-700 font-bold hover:underline flex items-center gap-1">&larr; Return to Commuter Dashboard</a>
+          <button type="button" onclick="quickPlan(localStorage.getItem('autoroute_destination')||'Mumbai CSMT', localStorage.getItem('autoroute_origin')||'Swargate')" class="px-4 py-2 rounded-xl bg-white border border-slate-200 hover:border-emerald-400 hover:bg-emerald-50/50 hover:text-emerald-800 font-semibold text-slate-800 transition-all shadow-xs cursor-pointer">Book Return Trip</button>
+        </div>
+      </div>
+    </div>
+    <div class="lg:col-span-5 space-y-4">
+      <!-- Feature 1: Last-Mile Cohort Ride Pool Pass -->
+      <div class="last-mile-card rounded-2xl p-5 space-y-3.5 float-in">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span class="w-7 h-7 rounded-lg bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold text-sm">🛺</span>
+            <div>
+              <h3 class="font-bold text-slate-900 text-sm">Last-Mile Cohort Cab Pool</h3>
+              <div class="text-[10px] text-slate-500">Matched from Deccan Queen Coach C3</div>
+            </div>
+          </div>
+          <span class="pool-badge text-[10px] font-bold px-2.5 py-0.5 rounded-full">4/4 Full</span>
+        </div>
+
+        <div class="bg-white/90 p-3 rounded-xl border border-indigo-100 space-y-2 text-xs">
+          <div class="flex justify-between items-center">
+            <span class="text-slate-500">Vehicle Assigned:</span>
+            <span class="font-mono font-bold text-slate-800 bg-slate-100 px-2 py-0.5 rounded">Tata Tigor EV &bull; MH-01-DK-4819</span>
+          </div>
+          <div class="flex justify-between items-center">
+            <span class="text-slate-500">Pickup Bay:</span>
+            <span class="font-bold text-indigo-700">CSMT East Gate (Bay 4)</span>
+          </div>
+          <div class="flex justify-between items-center">
+            <span class="text-slate-500">Boarding PIN / OTP:</span>
+            <span class="font-mono font-black text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200 tracking-wider">8841</span>
+          </div>
+          <div class="flex justify-between items-center pt-1 border-t border-slate-100">
+            <span class="text-slate-500">Your Share:</span>
+            <span class="font-bold text-slate-900">₹85.00 <span class="text-[10px] text-emerald-600 font-normal">(Auto-paid via Transit Pay)</span></span>
+          </div>
+        </div>
+
+        <div class="space-y-1.5">
+          <div class="text-[10px] font-bold uppercase tracking-wider text-slate-400">CO-PASSENGER POOL MATES (COACH C3)</div>
+          <div class="flex items-center gap-2 text-xs">
+            <div class="flex -space-x-1.5 overflow-hidden">
+              <span class="inline-block h-6 w-6 rounded-full ring-2 ring-white bg-emerald-500 text-white text-[9px] font-bold flex items-center justify-center">You</span>
+              <span class="inline-block h-6 w-6 rounded-full ring-2 ring-white bg-blue-500 text-white text-[9px] font-bold flex items-center justify-center">AS</span>
+              <span class="inline-block h-6 w-6 rounded-full ring-2 ring-white bg-purple-500 text-white text-[9px] font-bold flex items-center justify-center">VM</span>
+              <span class="inline-block h-6 w-6 rounded-full ring-2 ring-white bg-amber-500 text-white text-[9px] font-bold flex items-center justify-center">SP</span>
+            </div>
+            <span class="text-[11px] text-slate-600 font-medium">Ananya (C3-12), Vikram (C3-44), Sneha (C3-51)</span>
+          </div>
+        </div>
+
+        <div class="p-2.5 rounded-xl bg-blue-50 border border-blue-100 text-[11px] text-blue-800 flex items-center gap-1.5">
+          <span>🔄</span>
+          <span><strong>Train-Arrival Sync:</strong> Driver's dispatch timer is linked to Central Railway GPS. No cancellation fees if train is delayed.</span>
+        </div>
+      </div>
+
+      <!-- Feature 2: Smart Transfer Guarantee & Instant Delay Refund Widget -->
+      <div class="bg-white/95 backdrop-blur-sm rounded-2xl border border-emerald-100 shadow-sm hover:shadow-md p-5 space-y-3 float-in transition-all">
+        <div class="flex items-center justify-between">
+          <h3 class="font-bold text-slate-900 text-sm flex items-center gap-1.5"><span class="text-emerald-600">🛡️</span> AutoRoute Relay Guarantee</h3>
+          <span class="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full border border-emerald-200">Active</span>
+        </div>
+        <p class="text-xs text-slate-600 leading-relaxed">If connecting services are delayed &gt;15 minutes, AutoRoute automatically holds connection, switches routes for free, or disburses instant compensation.</p>
+        
+        <div id="delay-claim-box" class="p-3 rounded-xl bg-amber-50 border border-amber-200 text-xs space-y-2">
+          <div class="flex justify-between items-center">
+            <span class="text-amber-900 font-bold">Delay Telemetry:</span>
+            <span id="delay-status-text" class="text-emerald-700 font-bold bg-white px-2 py-0.5 rounded border border-emerald-200">0 mins delay (Nominal)</span>
+          </div>
+          <button id="delay-claim-btn" onclick="claimDelayRefund()" class="w-full py-2 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs shadow-xs transition-colors flex items-center justify-center gap-1">
+            <span>⚡ Test 15-Min Delay &amp; Claim ₹100 Auto-Refund</span>
+          </button>
+        </div>
+
+        <div class="pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-emerald-800 font-bold">
+          <span>ICICI Lombard Comprehensive Protection</span>
+          <span class="text-[11px] text-emerald-700">Policy #AR-99214</span>
+        </div>
+      </div>
+
+      <div class="bg-white/95 backdrop-blur-sm rounded-2xl border border-slate-200 shadow-sm hover:shadow-md p-5 space-y-3 float-in transition-all">
+        <div class="flex justify-between items-center"><h3 class="font-bold text-slate-900 text-sm">First-Mile Hub: Swargate</h3><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-gradient-to-r from-emerald-100 to-teal-100 text-emerald-800 border border-emerald-200">Gate 3</span></div>
+        <div class="p-3 rounded-xl bg-gradient-to-r from-slate-50 to-emerald-50/30 border border-slate-200 text-xs space-y-1"><div class="font-bold text-slate-800">Pre-paid Auto-Rickshaw Stand</div><div class="text-[11px] text-slate-500">1 min walk from underground concourse</div></div>
+        <div class="flex items-center justify-between pt-2">
+          <a href="ai-assistant.html" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1 hover:underline">🤖 Ask AI Assistant</a>
+          <a href="disruption-simulator.html" class="text-xs font-bold text-rose-600 hover:text-rose-700 hover:underline">⚡ Test Sandbox &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <div id="panel-history" class="hidden space-y-5">
+    <div class="banner-gradient rounded-3xl p-6 border border-emerald-100 shadow-sm float-in">
+      <div class="flex items-center gap-2 text-[10px] font-bold uppercase tracking-wider text-emerald-700 mb-1">
+        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>AUTOROUTE LEDGER &bull; MAHARASHTRA CORRIDOR
+      </div>
+      <div class="flex items-center justify-between flex-wrap gap-3 mt-1">
+        <h1 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">Booking History &amp; Travel Archive</h1>
+        <span class="text-[11px] font-bold text-emerald-800 bg-white/90 border border-emerald-200 px-3 py-1 rounded-full flex items-center gap-1.5 shadow-xs">&#128737;&#65039; Central Railway &amp; MahaMetro Integrated Telemetry</span>
+      </div>
+      <p class="text-xs sm:text-sm text-slate-600 mt-1 max-w-3xl">Review completed multi-modal commutes, download GST-compliant tax invoices, and re-book frequent corridors with one click.</p>
+    </div>
+
+    <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-5 space-y-4 float-in float-in-1">
+      <div class="flex flex-col sm:flex-row gap-3">
+        <div class="flex-grow flex items-center gap-2 bg-slate-50 hover:bg-slate-100/80 border border-slate-200 hover:border-emerald-300 rounded-2xl px-4 py-2.5 text-xs text-slate-500 transition-colors cursor-text">&#128269; Search by station, PNR (e.g. AR-PUN-MUM-7741), or corridor&hellip;</div>
+        <div class="flex items-center gap-2 bg-slate-50 border border-slate-200 rounded-2xl px-4 py-2.5 text-xs text-slate-700 font-semibold whitespace-nowrap shadow-xs">&#128197; Last 6 Months (May &ndash; Oct 2025)</div>
+      </div>
+      <div class="flex items-center gap-2 text-xs font-bold flex-wrap">
+        <button class="px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-sm shadow-emerald-600/30">All Past Journeys (28)</button>
+        <button class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-emerald-50 hover:text-emerald-700 text-slate-600 transition-colors">Completed (24)</button>
+        <button class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-rose-50 hover:text-rose-700 text-slate-600 transition-colors">Cancelled (3)</button>
+        <button class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 transition-colors">Expired Passes (1)</button>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div class="lg:col-span-2 space-y-4">
+        <div class="bg-white rounded-3xl border border-slate-200 shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all p-6 float-in float-in-2">
+          <div class="flex items-start justify-between mb-3 flex-wrap gap-2">
+            <div>
+              <div class="flex items-center gap-2 text-[10px] font-bold"><span class="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-200 flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>Completed</span><span class="text-slate-500 font-mono font-semibold">PNR: AR-PUN-MUM-7741</span></div>
+              <div class="font-extrabold text-slate-900 text-base mt-2">Pune (Swargate) &rarr; Mumbai (CSMT Terminal)</div>
+              <div class="text-[11px] text-slate-400 mt-0.5 font-medium">22 Oct 2025 &bull; Departure 08:45 AM &bull; Travel Time: 3h 25m</div>
+              <div class="flex items-center gap-1.5 mt-2.5 text-[10px] font-bold flex-wrap">
+                <span class="px-2.5 py-1 rounded-lg badge-metro border border-purple-200/50">&#128652; Pune Metro Line 1</span>
+                <span class="px-2.5 py-1 rounded-lg badge-rail border border-emerald-200/50">&#128646; Deccan Queen #12124 (AC Chair)</span>
+                <span class="px-2.5 py-1 rounded-lg badge-bus border border-sky-200/50">&#128652; Mumbai Metro Aqua L3</span>
+              </div>
+            </div>
+            <div class="text-right font-black text-2xl text-slate-900">&#8377;260.00</div>
+          </div>
+          <div class="border-t border-slate-100 pt-4 mt-4 text-xs">
+            <div class="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-2.5">Step-by-Step Leg Execution</div>
+            <div class="space-y-2 bg-slate-50/70 p-3.5 rounded-2xl border border-slate-100">
+              <div class="flex justify-between items-center"><span class="text-slate-700 font-medium">08:45 AM &bull; Swargate Metro Station &rarr; Pune Railway Station</span><span class="font-mono font-semibold text-slate-600">&#8377;25.00</span></div>
+              <div class="flex justify-between items-center text-emerald-700 font-medium text-[11px] bg-emerald-50/80 p-2 rounded-xl border border-emerald-100/60"><span>&#10003; 15 min covered skywalk interchange at Pune Junction (Completed on time)</span></div>
+              <div class="flex justify-between items-center"><span class="text-slate-700 font-medium">09:15 AM &bull; Pune Jn &rarr; Dadar Central</span><span class="font-mono font-semibold text-slate-600">&#8377;195.00</span></div>
+              <div class="flex justify-between items-center"><span class="text-slate-700 font-medium">11:47 AM &bull; Dadar Metro Concourse &rarr; CSMT Terminal</span><span class="font-mono font-semibold text-slate-600">&#8377;40.00</span></div>
+            </div>
+            <div class="flex items-center justify-between mt-4 pt-3 border-t border-slate-100 flex-wrap gap-2">
+              <span class="text-[11px] text-emerald-700 font-semibold flex items-center gap-1">&#9851;&#65039; Carbon Offset: -3.8 kg CO₂ vs private cab</span>
+              <div class="flex items-center gap-2 flex-wrap">
+                <button class="px-3 py-1.5 rounded-xl border border-slate-200 hover:border-slate-300 hover:bg-slate-50 text-slate-700 text-xs font-bold transition-colors">Tax Invoice (GST)</button>
+                <button class="px-3 py-1.5 rounded-xl border border-slate-200 hover:border-slate-300 hover:bg-slate-50 text-slate-700 text-xs font-bold transition-colors">E-Receipt</button>
+                <a href="index.html" class="px-4 py-1.5 rounded-xl btn-primary ripple text-white text-xs font-bold shadow-md shadow-emerald-600/30 flex items-center gap-1.5">&#8635; Book Corridor Again</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="space-y-4">
+        <div class="bg-white rounded-3xl border border-slate-200 shadow-sm hover:shadow-md transition-all p-6 float-in float-in-3">
+          <div class="flex items-center justify-between mb-4"><h3 class="font-bold text-slate-900 text-sm">Corridor Lifetime Stats</h3><span class="text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200 px-2.5 py-0.5 rounded-full">COMMUTER TIER 1</span></div>
+          <div class="grid grid-cols-2 gap-3 text-xs">
+            <div class="p-3 rounded-2xl bg-slate-50 border border-slate-100"><div class="text-[10px] font-bold uppercase text-slate-400">Trips Taken</div><div class="font-black text-slate-900 text-xl mt-0.5">28</div><div class="text-slate-400 text-[10px]">100% on-time transfer</div></div>
+            <div class="p-3 rounded-2xl bg-slate-50 border border-slate-100"><div class="text-[10px] font-bold uppercase text-slate-400">Total Distance</div><div class="font-black text-slate-900 text-xl mt-0.5">4,120</div><div class="text-slate-400 text-[10px]">km traversed</div></div>
+            <div class="p-3 rounded-2xl bg-emerald-50/50 border border-emerald-100"><div class="text-[10px] font-bold uppercase text-emerald-700">Transit Pay Savings</div><div class="font-black text-emerald-600 text-xl mt-0.5">&#8377;3,420</div><div class="text-emerald-700/70 text-[10px]">via unified ticketing</div></div>
+            <div class="p-3 rounded-2xl bg-teal-50/50 border border-teal-100"><div class="text-[10px] font-bold uppercase text-teal-700">Carbon Offset</div><div class="font-black text-teal-700 text-xl mt-0.5">118.4</div><div class="text-teal-700/70 text-[10px]">kg CO₂ averted</div></div>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-100 text-xs">
+            <div class="flex justify-between mb-1.5"><span class="text-slate-600 font-medium">Monthly Target (30 trips)</span><span class="font-bold text-emerald-700">93% Complete</span></div>
+            <div class="h-2 rounded-full bg-slate-100 overflow-hidden"><div class="h-full rounded-full bg-gradient-to-r from-emerald-500 to-teal-400" style="width:93%"></div></div>
+          </div>
+        </div>
+        <div class="bg-white rounded-3xl border border-slate-200 shadow-sm hover:shadow-md transition-all p-6 space-y-3 text-xs float-in float-in-4">
+          <h3 class="font-bold text-slate-900 text-sm flex items-center gap-1.5"><span class="text-emerald-600">&#128196;</span> Zero-Hassle Claims &amp; Invoices</h3>
+          <p class="text-slate-500 leading-relaxed">All tickets are pre-registered with your corporate GSTIN. Bulk export monthly travel records for expense filing or reimbursement.</p>
+          <div class="grid grid-cols-2 gap-2 pt-2">
+            <button class="px-3 py-2 rounded-xl border border-slate-200 hover:border-slate-300 hover:bg-slate-50 font-bold text-slate-700 text-xs transition-colors">Tax Profile</button>
+            <button class="px-3 py-2 rounded-xl border border-slate-200 hover:border-slate-300 hover:bg-slate-50 font-bold text-slate-700 text-xs transition-colors">Delay Claims</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="panel-waitlist" class="hidden space-y-4">
+    <div class="bg-white rounded-3xl border border-slate-200 shadow-md hover:shadow-lg transition-all p-6 sm:p-8 float-in">
+      <div class="flex flex-col sm:flex-row items-center gap-6">
+        <div class="shrink-0 w-28 h-28 rounded-full bg-gradient-to-tr from-amber-50 to-amber-100 border-4 border-amber-300 shadow-md shadow-amber-200/50 flex flex-col items-center justify-center">
+          <span class="text-[10px] font-black text-amber-700 uppercase tracking-wider">Queue Position</span>
+          <span class="text-3xl font-black text-amber-800">#1</span>
+        </div>
+        <div class="flex-grow text-center sm:text-left space-y-1">
+          <span class="px-3 py-1 rounded-full font-bold uppercase tracking-wider bg-amber-100 text-amber-800 border border-amber-200 text-[10px] shadow-xs">WAITLISTED</span>
+          <h2 class="text-lg sm:text-xl font-black text-slate-900 mt-1">You're #1 in queue for Coach C3, Deccan Queen #12124</h2>
+          <p class="text-xs text-slate-500">PNR: AR-WL-88402 &bull; Pune (Swargate) &rarr; Mumbai (CSMT) &bull; Today, 08:45 AM</p>
+          <div class="flex items-center gap-4 mt-3 text-xs justify-center sm:justify-start">
+            <div class="bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-lg"><span class="text-slate-500">Confirmation chance:</span> <span class="font-bold text-emerald-700 ml-1">94%</span></div>
+            <div class="bg-slate-50 border border-slate-200 px-2.5 py-1 rounded-lg"><span class="text-slate-500">Notify by:</span> <span class="font-bold text-slate-800 ml-1">16:30 chart freeze</span></div>
+          </div>
+        </div>
+        <div class="shrink-0 flex flex-col gap-2.5 w-full sm:w-auto">
+          <button class="px-5 py-2.5 rounded-2xl btn-primary ripple text-white text-xs font-bold text-center shadow-md shadow-emerald-600/30">Split-Ticket Backup Options</button>
+          <button class="px-5 py-2.5 rounded-2xl border border-slate-200 text-slate-600 hover:text-slate-900 text-xs font-bold text-center hover:bg-slate-50 hover:border-slate-300 transition-colors">Cancel Waitlist Request</button>
+        </div>
+      </div>
+      <div class="mt-6 pt-4 border-t border-slate-100 text-xs text-slate-600 bg-slate-50/80 rounded-2xl p-4 border border-slate-100 flex items-center gap-2">
+        <span class="text-base">&#9432;</span>
+        <span>Seats are allocated automatically in the order passengers joined the waitlist. If a confirmed passenger cancels, the top of this queue is promoted instantly and you'll receive a notification with an updated e-ticket.</span>
+      </div>
+    </div>
+  </div>
+</main>
+<footer class="bg-white border-t border-slate-200 mt-auto">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 grid grid-cols-2 sm:grid-cols-5 gap-6 text-xs">
+    <div class="col-span-2 sm:col-span-1">
+      <div class="flex items-center gap-2 mb-2"><div class="w-6 h-6 rounded-md bg-gradient-to-tr from-emerald-600 to-teal-400 flex items-center justify-center text-white"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div><span class="font-extrabold text-slate-900">AutoRoute</span></div>
+      <p class="text-slate-400">Unified transit mesh for the Pune ⇄ Lonavala ⇄ Mumbai corridor.</p>
+    </div>
+    <div>
+      <div class="font-bold text-slate-800 mb-2 uppercase tracking-wide text-[10px]">Plan &amp; Travel</div>
+      <ul class="space-y-1.5">
+        <li><a href="index.html" class="text-slate-500 hover:text-emerald-600">Plan Journey</a></li>
+        <li><a href="route-results.html" class="text-slate-500 hover:text-emerald-600">Route Results</a></li>
+        <li><a href="journey-details.html" class="text-slate-500 hover:text-emerald-600">Journey Details</a></li>
+        <li><a href="seat-selection.html" class="text-slate-500 hover:text-emerald-600">Seat Selection</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="font-bold text-slate-800 mb-2 uppercase tracking-wide text-[10px]">Account</div>
+      <ul class="space-y-1.5">
+        <li><a href="dashboard.html" class="text-slate-500 hover:text-emerald-600">Dashboard</a></li>
+        <li><a href="smart-pass.html" class="text-slate-500 hover:text-emerald-600">My Tickets &amp; History</a></li>
+        <li><a href="notifications.html" class="text-slate-500 hover:text-emerald-600">Notifications</a></li>
+        <li><a href="profile.html" class="text-slate-500 hover:text-emerald-600">Profile</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="font-bold text-slate-800 mb-2 uppercase tracking-wide text-[10px]">Tools</div>
+      <ul class="space-y-1.5">
+        <li><a href="journey-simulator.html" class="text-slate-500 hover:text-emerald-600">Journey Simulator</a></li>
+        <li><a href="ai-assistant.html" class="text-slate-500 hover:text-emerald-600 flex items-center gap-1"><span>🤖</span> AI Assistant</a></li>
+        <li><a href="disruption-simulator.html" class="text-slate-500 hover:text-emerald-600">Disruption Simulator</a></li>
+        <li><a href="login.html" class="text-slate-500 hover:text-emerald-600">Sign In / Register</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="font-bold text-slate-800 mb-2 uppercase tracking-wide text-[10px]">Corridor Status</div>
+      <p class="text-slate-500 flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-500"></span>Normal Operations</p>
+      <p class="text-slate-400 mt-1">99.2% on-time · 14 GPS feeds active</p>
+    </div>
+  </div>
+  <div class="border-t border-slate-100 py-3 text-center text-[11px] text-slate-400">&copy; 2026 AutoRoute Transit Mesh &middot; Demo prototype, not affiliated with any transit authority</div>
+</footer>
+
+
+<script>
+function setPassTab(tab) {
+  document.getElementById("panel-active").classList.toggle("hidden", tab !== "active");
+  document.getElementById("panel-history").classList.toggle("hidden", tab !== "history");
+  document.getElementById("panel-waitlist").classList.toggle("hidden", tab !== "waitlist");
+  const base = "px-3.5 py-1.5 rounded-lg flex items-center gap-1.5 ";
+  document.getElementById("tab-btn-active").className = base + (tab === "active" ? "bg-slate-100 text-slate-800" : "text-slate-500 hover:text-slate-800");
+  document.getElementById("tab-btn-history").className = base + (tab === "history" ? "bg-slate-100 text-slate-800" : "text-slate-500 hover:text-slate-800");
+  document.getElementById("tab-btn-waitlist").className = base + (tab === "waitlist" ? "bg-slate-100 text-slate-800" : "text-slate-500 hover:text-slate-800");
+}
+let timer = 30;
+setInterval(function() {
+  timer--;
+  if (timer <= 0) timer = 30;
+  const el = document.getElementById("countdown");
+  if (el) el.innerText = timer;
+}, 1000);
+window.addEventListener("DOMContentLoaded", function() {
+  const orig = localStorage.getItem("autoroute_origin") || "Swargate";
+  const dest = localStorage.getItem("autoroute_destination") || "CSMT";
+  const seat = localStorage.getItem("autoroute_seat") || "24W";
+  const coach = localStorage.getItem("autoroute_coach") || "C3";
+  const fare = localStorage.getItem("autoroute_total_fare") || "260";
+  const pnr = localStorage.getItem("autoroute_pnr") || "AR-984210-PNQ";
+  const pnrEl = document.getElementById("pass-pnr-display");
+  if (pnrEl) pnrEl.innerText = pnr;
+  document.getElementById("endpoints-label").innerText = orig.split(" ")[0] + " ➔ " + dest.split(" ")[0];
+  document.getElementById("seat-label").innerText = "Seat " + seat + (coach ? " (" + coach + ")" : "");
+  document.getElementById("fare-label").innerText = "₹" + fare + ".00";
+
+  const passName = localStorage.getItem("autoroute_user_name") || "Rahul Deshmukh";
+  const nameEl = document.getElementById("passenger-name-display");
+  if (nameEl) nameEl.innerText = passName;
+
+  const bPoint = localStorage.getItem("autoroute_boarding_point") || "06:45 AM • Swargate Bus Port (Platform 3)";
+  const dPoint = localStorage.getItem("autoroute_dropping_point") || "10:00 AM • Dadar Asiad Stand (Pritam Hotel)";
+  const bEl = document.getElementById("pass-boarding-display");
+  const dEl = document.getElementById("pass-dropping-display");
+  if (bEl) bEl.innerText = bPoint;
+  if (dEl) dEl.innerText = dPoint;
+
+  const service = localStorage.getItem("autoroute_booked_service");
+  if (service) {
+    const serviceTitle = document.querySelector("#panel-active h1");
+    if (serviceTitle) serviceTitle.innerText = service + " Pass Ready!";
+  }
+});
+
+function claimDelayRefund() {
+  let currentWallet = parseInt(localStorage.getItem("autoroute_wallet") || "1450");
+  currentWallet += 100;
+  localStorage.setItem("autoroute_wallet", currentWallet.toString());
+  
+  const topWallet = document.getElementById("top-wallet-val");
+  if (topWallet) topWallet.innerText = "₹" + currentWallet.toLocaleString("en-IN");
+  const sideWallet = document.getElementById("sidebar-wallet-val");
+  if (sideWallet) sideWallet.innerText = "₹" + currentWallet.toLocaleString("en-IN") + ".00";
+  
+  const statusEl = document.getElementById("delay-status-text");
+  if (statusEl) {
+    statusEl.className = "text-rose-700 font-bold bg-rose-50 px-2 py-0.5 rounded border border-rose-200 animate-pulse";
+    statusEl.innerText = "18m delay reported at Monkey Hill";
+  }
+  
+  const btn = document.getElementById("delay-claim-btn");
+  if (btn) {
+    btn.className = "w-full py-2 rounded-xl bg-emerald-600 text-white font-bold text-xs shadow-xs flex items-center justify-center gap-1";
+    btn.innerHTML = "<span>✓ ₹100 Auto-Credited to Transit Pay!</span>";
+    btn.disabled = true;
+  }
+  
+  alert("🎉 AutoRoute Relay Delay Guarantee Triggered!\n\n• Central Railway GPS reported an 18-minute delay on Deccan Queen.\n• AutoRoute policy #AR-99214 executed automatically.\n• ₹100.00 compensation credited instantly to your Transit Pay wallet (New balance: ₹" + currentWallet.toLocaleString("en-IN") + ").\n• Your matched Cab Pool driver at CSMT East Gate has been notified to adjust pickup time by +18 minutes.");
+}
+</script>
+</div>
+<script src="js/autoroute-desktop.js"></script>
+</body>
+</html>

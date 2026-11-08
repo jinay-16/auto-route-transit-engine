@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Pick your coach and seat for the next leg of your AutoRoute journey.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22><text y=%2220%22 font-size=%2220%22>🚏</text></svg>">
+  <title>AutoRoute - Seat Selection</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gradient-to-br from-[#f0f4ff] via-[#e8f5ee] to-[#f3f0ff] text-slate-800 min-h-screen flex flex-col font-sans">
+<!-- Mobile Sidebar Overlay Backdrop -->
+<div id="sidebar-backdrop" onclick="window.toggleMobileNav()" class="fixed inset-0 bg-slate-900/50 backdrop-blur-xs z-40 hidden md:hidden transition-opacity"></div>
+
+<!-- Left Sidebar Navigation -->
+<aside id="app-sidebar" class="fixed top-0 bottom-0 left-0 w-64 bg-white/95 backdrop-blur-xl border-r border-slate-200/90 shadow-lg z-50 flex flex-col justify-between transition-transform duration-300 ease-in-out -translate-x-full md:translate-x-0">
+  <!-- Brand & Corridor Header -->
+  <div class="p-4 border-b border-slate-100 shrink-0">
+    <div class="flex items-center justify-between">
+      <a href="landing.html" class="flex items-center gap-2.5 group">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-emerald-600 via-teal-600 to-emerald-500 flex items-center justify-center text-white shadow-md shadow-emerald-600/30 group-hover:scale-105 group-hover:rotate-3 transition-transform">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+        </div>
+        <div class="flex flex-col">
+          <span class="text-xl font-extrabold tracking-tight text-slate-900 group-hover:text-emerald-700 transition-colors leading-none">AutoRoute</span>
+          <span class="text-[9px] font-bold text-emerald-600 uppercase tracking-widest mt-0.5">TRANSIT MESH</span>
+        </div>
+      </a>
+      <button class="md:hidden w-8 h-8 rounded-lg hover:bg-slate-100 flex items-center justify-center text-slate-500 cursor-pointer" onclick="window.toggleMobileNav()">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+
+    <div class="mt-3 px-3 py-1.5 rounded-xl bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-200/80 flex items-center justify-between text-[11px] font-bold text-emerald-800">
+      <span class="flex items-center gap-1.5">
+        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span>PUNE &#8644; MUMBAI</span>
+      </span>
+      <span class="text-[10px] bg-emerald-100 px-1.5 py-0.5 rounded text-emerald-700 font-semibold">99.4% On-Time</span>
+    </div>
+  </div>
+
+  <!-- Navigation Links with Categories -->
+  <nav class="flex-grow overflow-y-auto p-3 space-y-4 text-xs font-semibold text-slate-600 no-scrollbar">
+    <!-- Group: Main Platform -->
+    <div>
+      <div class="px-2.5 pb-1 text-[10px] font-extrabold uppercase tracking-wider text-slate-400">Main Platform</div>
+      <div class="space-y-0.5">
+        <a href="landing.html" class="nav-sidebar-link">
+          <span class="text-base">&#127968;</span>
+          <span>Home Showcase</span>
+        </a>
+        <a href="index.html" class="nav-sidebar-link">
+          <span class="text-base">&#129517;</span>
+          <span>Plan Journey</span>
+        </a>
+        <a href="dashboard.html" class="nav-sidebar-link">
+          <span class="text-base">&#128202;</span>
+          <span>Dashboard</span>
+        </a>
+        <a href="ai-assistant.html" class="nav-sidebar-link flex items-center justify-between text-indigo-700 bg-indigo-50/50 hover:bg-indigo-100 font-bold">
+          <div class="flex items-center gap-3">
+            <span class="text-base">&#129302;</span>
+            <span>AI Assistant</span>
+          </div>
+          <span class="text-[9px] bg-indigo-200/80 text-indigo-800 px-1.5 py-0.5 rounded-full font-bold">Tool AI</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Group: Transit & Booking -->
+    <div>
+      <div class="px-2.5 pb-1 text-[10px] font-extrabold uppercase tracking-wider text-slate-400">Transit &amp; Booking</div>
+      <div class="space-y-0.5">
+        <a href="route-results.html" class="nav-sidebar-link">
+          <span class="text-base">&#128256;</span>
+          <span>Route Results</span>
+        </a>
+        <a href="journey-details.html" class="nav-sidebar-link">
+          <span class="text-base">&#9201;&#65039;</span>
+          <span>Journey Details</span>
+        </a>
+        <a href="seat-selection.html" class="nav-sidebar-link">
+          <span class="text-base">&#128186;</span>
+          <span>Seat Selection</span>
+        </a>
+        <a href="smart-pass.html" class="nav-sidebar-link">
+          <span class="text-base">&#127903;&#65039;</span>
+          <span>My Smart Passes</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Group: Simulation Labs -->
+    <div>
+      <div class="px-2.5 pb-1 text-[10px] font-extrabold uppercase tracking-wider text-slate-400">Simulation Labs</div>
+      <div class="space-y-0.5">
+        <a href="journey-simulator.html" class="nav-sidebar-link">
+          <span class="text-base">&#129514;</span>
+          <span>Journey Simulator</span>
+        </a>
+        <a href="disruption-simulator.html" class="nav-sidebar-link">
+          <span class="text-base">&#9889;</span>
+          <span>Disruption Guardian</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Group: Commuter Account -->
+    <div>
+      <div class="px-2.5 pb-1 text-[10px] font-extrabold uppercase tracking-wider text-slate-400">Commuter Account</div>
+      <div class="space-y-0.5">
+        <a href="notifications.html" class="nav-sidebar-link flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <span class="text-base">&#128276;</span>
+            <span>Notifications</span>
+          </div>
+          <span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
+        </a>
+        <a href="profile.html" class="nav-sidebar-link">
+          <span class="text-base">&#128100;</span>
+          <span>Profile &amp; Wallet</span>
+        </a>
+        <a href="login.html" class="nav-sidebar-link">
+          <span class="text-base">&#128272;</span>
+          <span>Sign In / Switch</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Sidebar Footer: Wallet & Profile -->
+  <div class="p-3 border-t border-slate-100 shrink-0 space-y-2 bg-slate-50/60">
+    <div class="p-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-md shadow-emerald-600/25 space-y-1.5">
+      <div class="flex items-center justify-between text-[10px] font-bold text-emerald-100">
+        <span>TRANSIT PAY FAST-TAG</span>
+        <span class="bg-emerald-700/80 px-1.5 py-0.5 rounded text-[9px]">Auto-Reload</span>
+      </div>
+      <div class="flex items-center justify-between">
+        <span class="text-lg font-black tracking-tight" id="sidebar-wallet-val">&#8377;1,450.00</span>
+        <button onclick="window.openAddMoneyModal()" class="px-2.5 py-1 rounded-lg bg-white text-emerald-800 font-extrabold text-[10px] hover:bg-emerald-50 shadow-xs transition-all hover:scale-105 active:scale-95 cursor-pointer">
+          + Add
+        </button>
+      </div>
+    </div>
+
+    <div class="flex items-center justify-between pt-1">
+      <a href="profile.html" class="flex items-center gap-2 group flex-grow">
+        <div class="w-7 h-7 rounded-lg bg-slate-800 text-white font-bold text-xs flex items-center justify-center ring-2 ring-emerald-500/30 group-hover:scale-105 transition-transform">RD</div>
+        <div class="flex flex-col">
+          <span class="text-xs font-bold text-slate-800 group-hover:text-emerald-700 transition-colors leading-tight">Rahul Deshmukh</span>
+          <span class="text-[9px] font-semibold text-emerald-600">Gold Commuter</span>
+        </div>
+      </a>
+      <button class="theme-toggle-btn w-7 h-7 rounded-lg hover:bg-slate-200 flex items-center justify-center text-xs cursor-pointer" onclick="window.toggleTheme()" title="Switch Light/Dark Theme">&#127769;</button>
+    </div>
+  </div>
+</aside>
+<div class="main-content-layout flex flex-col min-h-screen">
+<!-- Top Utility Header -->
+<header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200/80 px-4 sm:px-6 h-14 flex items-center justify-between transition-colors">
+  <div class="flex items-center gap-3">
+    <button onclick="window.toggleMobileNav()" class="md:hidden w-8 h-8 rounded-xl bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-700 cursor-pointer" title="Toggle Navigation Menu">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+    <div class="flex items-center gap-2">
+      <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+      <span class="text-xs font-bold text-slate-700 hidden sm:inline">Western Corridor Transit Mesh</span>
+      <span class="text-xs text-slate-400 hidden sm:inline">&bull; 14 GPS Feeds Active</span>
+    </div>
+  </div>
+
+  <div class="flex items-center gap-2 sm:gap-3">
+    <button onclick="window.openAddMoneyModal()" class="flex items-center gap-1.5 px-3 py-1 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-800 text-xs font-bold border border-emerald-200/80 shadow-xs cursor-pointer transition-all" id="wallet-pill">
+      <span>Transit Pay:</span>
+      <strong id="top-wallet-val" class="font-extrabold text-emerald-700">&#8377;1,450</strong>
+    </button>
+    <a href="notifications.html" class="relative w-8 h-8 rounded-xl bg-slate-100 hover:bg-slate-200/80 flex items-center justify-center text-slate-600 transition-colors" title="Notifications">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.4-1.4A2 2 0 0118 14.2V11a6 6 0 10-12 0v3.2a2 2 0 01-.6 1.4L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+      <span class="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-rose-500 border-2 border-white animate-pulse"></span>
+    </a>
+    <button class="theme-toggle-btn w-8 h-8 rounded-xl bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-xs cursor-pointer" onclick="window.toggleTheme()" title="Switch Light/Dark Theme">&#127769;</button>
+    <a href="profile.html" class="w-8 h-8 rounded-xl bg-gradient-to-tr from-slate-800 to-slate-900 text-white font-bold text-xs flex items-center justify-center ring-2 ring-emerald-500/40 hover:scale-105 transition-all shadow-xs" title="Rahul Deshmukh (Gold Tier)">RD</a>
+  </div>
+</header>
+
+<main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-5 space-y-4">
+  <!-- Service Selection Banner (redBus Style) -->
+  <div class="bg-white rounded-2xl border border-slate-200/90 shadow-sm p-4 flex flex-col md:flex-row md:items-center justify-between gap-4 float-in">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl bg-red-50 text-[#d84e55] flex items-center justify-center font-bold text-lg border border-red-100">🚏</div>
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="font-black text-slate-900 text-lg" id="service-title-display">MSRTC Shivneri AC Scania Multi-Axle</span>
+          <span class="primo-badge red">Primo Assured</span>
+          <span class="rating-pill high">★ 4.8</span>
+        </div>
+        <div class="text-xs text-slate-500 mt-0.5 flex items-center gap-2 flex-wrap">
+          <span id="service-corridor-display">Swargate, Pune ➔ Dadar Asiad, Mumbai</span>
+          <span>&bull;</span>
+          <span class="font-bold text-slate-700" id="service-timing-display">06:45 AM &ndash; 10:00 AM (3h 15m)</span>
+          <span>&bull;</span>
+          <span class="text-emerald-700 font-semibold">99.4% On-Time</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-2 text-xs font-bold self-start md:self-auto">
+      <a href="route-results.html" class="px-3 py-1.5 rounded-xl border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-600 transition-colors">
+        &larr; Change Bus
+      </a>
+      <span class="px-3 py-1.5 rounded-xl bg-[#d84e55] text-white shadow-xs">
+        Select Seat &amp; Boarding
+      </span>
+    </div>
+  </div>
+
+  <!-- Deck & Seat Selection Area (redBus Style) -->
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
+    
+    <!-- LEFT: Bus Deck Architecture (col-span-7) -->
+    <div class="lg:col-span-7 space-y-4">
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 space-y-4 float-in">
+        <!-- Deck Switcher Tabs -->
+        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+          <div class="flex items-center gap-2">
+            <button onclick="setDeck('lower', this)" id="deck-lower-btn" class="px-4 py-2 rounded-xl bg-[#d84e55] text-white font-bold text-xs shadow-xs cursor-pointer">
+              LOWER DECK (Seater)
+            </button>
+            <button onclick="setDeck('upper', this)" id="deck-upper-btn" class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs cursor-pointer transition-colors">
+              UPPER DECK (Sleeper)
+            </button>
+          </div>
+          <span class="text-[11px] text-slate-400 font-medium">Click seat to select/deselect</span>
+        </div>
+
+        <!-- Bus Interior Container -->
+        <div class="bus-deck-container">
+          <!-- Steering Wheel & Front Area -->
+          <div class="bus-driver-cabin flex items-center justify-between text-xs text-slate-400">
+            <span class="font-bold text-[10px] uppercase tracking-wider text-slate-400">FRONT (DOOR ENTRANCE)</span>
+            <div class="flex items-center gap-1.5 font-bold text-slate-600 bg-white px-2.5 py-1 rounded-lg border border-slate-200 shadow-2xs">
+              <span>DRIVER CABIN</span>
+              <span class="text-base">🛞</span>
+            </div>
+          </div>
+
+          <!-- Lower Deck Seating Grid (2+2 Layout) -->
+          <div id="deck-lower-view" class="space-y-3 py-2">
+            <div id="seats-blueprint-container" class="space-y-2.5">
+              <!-- Dynamically populated or rendered -->
+            </div>
+          </div>
+
+          <!-- Upper Deck Sleeper Grid (2+1 Berth Layout) -->
+          <div id="deck-upper-view" class="hidden space-y-3 py-2">
+            <div id="sleeper-blueprint-container" class="space-y-2.5">
+              <!-- Dynamically populated sleeper berths -->
+            </div>
+          </div>
+
+          <!-- redBus Legend Bar -->
+          <div class="flex items-center justify-between flex-wrap gap-2 text-xs pt-4 mt-3 border-t border-slate-200 text-slate-600">
+            <div class="flex items-center gap-1.5">
+              <span class="w-4 h-4 rounded border-2 border-slate-300 bg-white inline-block"></span>
+              <span class="text-[11px]">Available</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <span class="w-4 h-4 rounded bg-[#d84e55] inline-block"></span>
+              <span class="text-[11px] font-bold text-[#d84e55]">Selected</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <span class="w-4 h-4 rounded bg-slate-200 inline-block"></span>
+              <span class="text-[11px]">Booked</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <span class="w-4 h-4 rounded bg-pink-100 border border-pink-400 text-pink-700 text-[10px] font-bold flex items-center justify-center">♀</span>
+              <span class="text-[11px] text-pink-700 font-semibold">Ladies Reserved</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Coach Features Note -->
+        <div class="p-3 bg-emerald-50 rounded-xl border border-emerald-200 text-xs text-emerald-800 flex items-center gap-2">
+          <span>🛡️</span>
+          <span><strong>AutoRoute Guarantee:</strong> Clean sanitized berths &bull; High air-filtration HVAC &bull; Arrival synchronized last-mile feeder at destination station.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Boarding/Dropping & Passenger Details & Checkout (col-span-5) -->
+    <div class="lg:col-span-5 space-y-4">
+      
+      <!-- Step 1: Boarding & Dropping Selection -->
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-4 space-y-3 float-in">
+        <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+          <span class="font-extrabold text-slate-900 text-xs uppercase tracking-wider flex items-center gap-1.5">
+            <span>📍</span> 1. BOARDING &amp; DROPPING POINTS
+          </span>
+          <span class="text-[10px] text-emerald-700 font-bold bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">Expressway Route</span>
+        </div>
+
+        <!-- Boarding Point Selector -->
+        <div>
+          <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">SELECT BOARDING POINT (PUNE)</label>
+          <select id="boarding-select" onchange="updateTripPoints()" class="w-full p-2.5 rounded-xl border border-slate-200 text-xs font-semibold text-slate-800 focus:border-[#d84e55] outline-none bg-slate-50">
+            <option value="Swargate Bus Port (Platform 3) - 06:45 AM">06:45 AM &bull; Swargate Bus Port (Platform 3)</option>
+            <option value="Pune Railway Station Concourse (Gate 2) - 07:05 AM">07:05 AM &bull; Pune Station Concourse (Gate 2)</option>
+            <option value="Wakad Ginger Hotel Flyover - 07:35 AM">07:35 AM &bull; Wakad Ginger Hotel Flyover</option>
+            <option value="Hinjawadi Bridge (Bhumkar Chowk) - 07:50 AM">07:50 AM &bull; Hinjawadi Bridge (Bhumkar Chowk)</option>
+          </select>
+        </div>
+
+        <!-- Dropping Point Selector -->
+        <div>
+          <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">SELECT DROPPING POINT (MUMBAI)</label>
+          <select id="dropping-select" onchange="updateTripPoints()" class="w-full p-2.5 rounded-xl border border-slate-200 text-xs font-semibold text-slate-800 focus:border-[#d84e55] outline-none bg-slate-50">
+            <option value="Dadar Asiad Stand (Pritam Hotel) - 10:00 AM">10:00 AM &bull; Dadar Asiad Stand (Pritam Hotel)</option>
+            <option value="CSMT Terminal Concourse - 10:25 AM">10:25 AM &bull; CSMT Terminal Concourse</option>
+            <option value="BKC Aqua Line 3 Interchange - 09:45 AM">09:45 AM &bull; BKC Aqua Line 3 Interchange</option>
+            <option value="Vashi Toll Plaza (Navi Mumbai) - 09:20 AM">09:20 AM &bull; Vashi Toll Plaza (Navi Mumbai)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Step 2: Passenger Details (redBus Style) -->
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-4 space-y-3 float-in">
+        <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+          <span class="font-extrabold text-slate-900 text-xs uppercase tracking-wider flex items-center gap-1.5">
+            <span>👤</span> 2. PASSENGER INFORMATION
+          </span>
+          <span class="text-[10px] text-slate-500">Auto-filled via DigiLocker</span>
+        </div>
+
+        <div class="space-y-2 text-xs">
+          <div>
+            <label class="text-[10px] font-bold text-slate-400 uppercase">Primary Passenger Name</label>
+            <input type="text" id="passenger-name-input" value="Rahul Deshmukh" class="w-full mt-1 p-2 rounded-xl border border-slate-200 font-bold text-slate-800 focus:border-[#d84e55] outline-none">
+          </div>
+
+          <div class="grid grid-cols-2 gap-2">
+            <div>
+              <label class="text-[10px] font-bold text-slate-400 uppercase">Age</label>
+              <input type="number" id="passenger-age-input" value="32" class="w-full mt-1 p-2 rounded-xl border border-slate-200 font-bold text-slate-800 focus:border-[#d84e55] outline-none">
+            </div>
+            <div>
+              <label class="text-[10px] font-bold text-slate-400 uppercase">Gender</label>
+              <select id="passenger-gender-select" class="w-full mt-1 p-2 rounded-xl border border-slate-200 font-bold text-slate-800 focus:border-[#d84e55] outline-none bg-white">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label class="text-[10px] font-bold text-slate-400 uppercase">Contact Mobile (For WhatsApp Pass &amp; Driver Link)</label>
+            <input type="text" id="passenger-phone-input" value="+91 98201 44829" class="w-full mt-1 p-2 rounded-xl border border-slate-200 font-bold text-slate-800 focus:border-[#d84e55] outline-none">
+          </div>
+
+          <div>
+            <label class="text-[10px] font-bold text-slate-400 uppercase">Official Email (For GST Invoice)</label>
+            <input type="email" id="passenger-email-input" value="rahul.deshmukh@autoroute.in" class="w-full mt-1 p-2 rounded-xl border border-slate-200 font-bold text-slate-800 focus:border-[#d84e55] outline-none">
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3: Coupon Discount & Fare Breakdown -->
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-4 space-y-3 float-in">
+        <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+          <span class="font-extrabold text-slate-900 text-xs uppercase tracking-wider flex items-center gap-1.5">
+            <span>🏷️</span> 3. OFFERS &amp; PAYMENT BREAKDOWN
+          </span>
+          <span class="text-xs text-emerald-700 font-bold" id="chosen-seat-pill">Seat: 04W</span>
+        </div>
+
+        <!-- Coupon Input Box -->
+        <div class="space-y-1 text-xs">
+          <div class="flex gap-2">
+            <input type="text" id="promo-input" placeholder="Enter coupon code (e.g. AUTOFIRST)" class="flex-grow p-2 rounded-xl border border-slate-200 uppercase font-mono font-bold text-slate-800 outline-none focus:border-[#d84e55]">
+            <button type="button" onclick="window.applyPromoCode()" class="px-3 py-2 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-xl cursor-pointer transition-all">
+              Apply
+            </button>
+          </div>
+          <div class="flex items-center gap-2 pt-1">
+            <span class="text-[10px] text-slate-400">Available:</span>
+            <button type="button" onclick="window.applyPromoCode('AUTOFIRST')" class="text-[10px] font-bold text-[#d84e55] bg-red-50 hover:bg-red-100 border border-red-200 px-2 py-0.5 rounded cursor-pointer">
+              AUTOFIRST (₹50 OFF)
+            </button>
+          </div>
+          <div id="promo-msg"></div>
+        </div>
+
+        <!-- Price Details -->
+        <div class="space-y-1.5 text-xs text-slate-600 border-t border-slate-100 pt-2">
+          <div class="flex justify-between">
+            <span>Base Fare (1 Passenger)</span>
+            <span class="font-bold text-slate-900" id="base-fare-display">₹410.00</span>
+          </div>
+          <div class="flex justify-between">
+            <span>Operator GST (5%)</span>
+            <span class="font-bold text-slate-900">₹20.50</span>
+          </div>
+          <div class="flex justify-between">
+            <span>Passenger Relay Insurance</span>
+            <span class="font-bold text-emerald-700">FREE (Waived)</span>
+          </div>
+          <div id="discount-row" class="hidden flex justify-between text-emerald-700 font-bold">
+            <span>Coupon Discount</span>
+            <span id="discount-row-val">-₹50.00</span>
+          </div>
+          <div class="flex justify-between items-center pt-2 border-t border-slate-100 text-slate-900">
+            <span class="font-black text-sm">Total Payable</span>
+            <span class="text-2xl font-black text-[#d84e55]" id="total-payable-val">₹430.50</span>
+          </div>
+        </div>
+
+        <!-- Payment Mode Selection -->
+        <div class="space-y-2 pt-2 border-t border-slate-100 text-xs">
+          <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">SELECT PAYMENT METHOD</label>
+          
+          <label class="flex items-center justify-between p-2.5 rounded-xl border-2 border-emerald-500 bg-emerald-50/40 cursor-pointer">
+            <div class="flex items-center gap-2">
+              <input type="radio" name="paymethod" checked class="text-emerald-600">
+              <span class="font-bold text-slate-800">Transit Pay Fast-Tag (1-Tap)</span>
+            </div>
+            <span class="font-bold text-emerald-800 text-[11px]" id="pay-wallet-balance">Bal: ₹1,450.00</span>
+          </label>
+
+          <label class="flex items-center justify-between p-2.5 rounded-xl border border-slate-200 hover:border-slate-300 cursor-pointer">
+            <div class="flex items-center gap-2">
+              <input type="radio" name="paymethod" class="text-slate-600">
+              <span class="font-semibold text-slate-700">UPI (Google Pay / PhonePe / QR)</span>
+            </div>
+            <span class="text-[10px] text-slate-400">Zero surcharge</span>
+          </label>
+
+          <label class="flex items-center justify-between p-2.5 rounded-xl border border-slate-200 hover:border-slate-300 cursor-pointer">
+            <div class="flex items-center gap-2">
+              <input type="radio" name="paymethod" class="text-slate-600">
+              <span class="font-semibold text-slate-700">Credit / Debit Card (Visa, RuPay, MC)</span>
+            </div>
+            <span class="text-[10px] text-slate-400">All banks</span>
+          </label>
+        </div>
+
+        <!-- Final Confirm Button -->
+        <button type="button" onclick="executeFinalCheckout()" class="btn-primary ripple w-full py-3.5 rounded-xl bg-gradient-to-r from-[#d84e55] to-red-600 hover:from-red-600 hover:to-red-700 text-white font-extrabold text-sm shadow-lg shadow-red-500/25 transition-all hover:scale-[1.02] active:scale-95 cursor-pointer flex items-center justify-center gap-2 mt-2">
+          <span>PROCEED TO BOOK &amp; GENERATE PASS</span>
+          <span>&rarr;</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<footer class="bg-white border-t border-slate-200 mt-auto">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 grid grid-cols-2 sm:grid-cols-5 gap-6 text-xs">
+    <div class="col-span-2 sm:col-span-1">
+      <div class="flex items-center gap-2 mb-2"><div class="w-6 h-6 rounded-md bg-gradient-to-tr from-emerald-600 to-teal-400 flex items-center justify-center text-white"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div><span class="font-extrabold text-slate-900">AutoRoute</span></div>
+      <p class="text-slate-400">Unified transit mesh for the Pune ⇄ Lonavala ⇄ Mumbai corridor.</p>
+    </div>
+    <div>
+      <div class="font-bold text-slate-800 mb-2 uppercase tracking-wide text-[10px]">Plan &amp; Travel</div>
+      <ul class="space-y-1.5">
+        <li><a href="index.html" class="text-slate-500 hover:text-emerald-600">Plan Journey</a></li>
+        <li><a href="route-results.html" class="text-slate-500 hover:text-emerald-600">Route Results</a></li>
+        <li><a href="journey-details.html" class="text-slate-500 hover:text-emerald-600">Journey Details</a></li>
+        <li><a href="seat-selection.html" class="text-slate-500 hover:text-emerald-600">Seat Selection</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="font-bold text-slate-800 mb-2 uppercase tracking-wide text-[10px]">Account</div>
+      <ul class="space-y-1.5">
+        <li><a href="dashboard.html" class="text-slate-500 hover:text-emerald-600">Dashboard</a></li>
+        <li><a href="smart-pass.html" class="text-slate-500 hover:text-emerald-600">My Tickets &amp; History</a></li>
+        <li><a href="notifications.html" class="text-slate-500 hover:text-emerald-600">Notifications</a></li>
+        <li><a href="profile.html" class="text-slate-500 hover:text-emerald-600">Profile</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="font-bold text-slate-800 mb-2 uppercase tracking-wide text-[10px]">Tools</div>
+      <ul class="space-y-1.5">
+        <li><a href="journey-simulator.html" class="text-slate-500 hover:text-emerald-600">Journey Simulator</a></li>
+        <li><a href="ai-assistant.html" class="text-slate-500 hover:text-emerald-600">AI Assistant Hub</a></li>
+        <li><a href="disruption-simulator.html" class="text-slate-500 hover:text-emerald-600">Disruption Simulator</a></li>
+        <li><a href="login.html" class="text-slate-500 hover:text-emerald-600">Sign In / Register</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="font-bold text-slate-800 mb-2 uppercase tracking-wide text-[10px]">Corridor Status</div>
+      <p class="text-slate-500 flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-500"></span>Normal Operations</p>
+      <p class="text-slate-400 mt-1">99.2% on-time · 14 GPS feeds active</p>
+    </div>
+  </div>
+  <div class="border-t border-slate-100 py-3 text-center text-[11px] text-slate-400">&copy; 2026 AutoRoute Transit Mesh &middot; Demo prototype, not affiliated with any transit authority</div>
+</footer>
+
+<script>
+let currentDeck = "lower";
+let activeSeat = "04W";
+let basePrice = 410;
+const bookedSeats = ["01W", "06A", "09W", "10A", "14W", "18A", "22W"];
+
+function renderLowerDeck() {
+  const container = document.getElementById("seats-blueprint-container");
+  if (!container) return;
+  let html = "";
+  for (let r = 1; r <= 7; r++) {
+    const s1 = (r * 4 - 3 < 10 ? "0" : "") + (r * 4 - 3) + "W";
+    const s2 = (r * 4 - 2 < 10 ? "0" : "") + (r * 4 - 2) + "A";
+    const s3 = (r * 4 - 1 < 10 ? "0" : "") + (r * 4 - 1) + "A";
+    const s4 = (r * 4 < 10 ? "0" : "") + (r * 4) + "W";
+    
+    html += `
+      <div class="flex justify-between items-center gap-2">
+        <div class="flex gap-2">
+          ${seatBtn(s1)}
+          ${seatBtn(s2)}
+        </div>
+        <span class="text-[10px] text-slate-400 font-mono">Row ${r}</span>
+        <div class="flex gap-2">
+          ${seatBtn(s3)}
+          ${seatBtn(s4, r % 2 === 0)}
+        </div>
+      </div>
+    `;
+  }
+  container.innerHTML = html;
+}
+
+function renderUpperDeck() {
+  const container = document.getElementById("sleeper-blueprint-container");
+  if (!container) return;
+  let html = "";
+  for (let r = 1; r <= 5; r++) {
+    const b1 = "U" + r + "W";
+    const b2 = "U" + r + "A";
+    const b3 = "S" + r + "W";
+    
+    html += `
+      <div class="flex justify-between items-center gap-3">
+        <div class="flex gap-2">
+          ${sleeperBtn(b1)}
+          ${sleeperBtn(b2)}
+        </div>
+        <span class="text-[10px] text-slate-400 font-mono">Berth ${r}</span>
+        <div>
+          ${sleeperBtn(b3, true)}
+        </div>
+      </div>
+    `;
+  }
+  container.innerHTML = html;
+}
+
+function seatBtn(num, isLadies) {
+  if (num === activeSeat) {
+    return `<div onclick="pickSeat('${num}')" class="seat-item selected" title="${num} (Selected)">${num}</div>`;
+  }
+  if (bookedSeats.includes(num)) {
+    return `<div class="seat-item booked" title="${num} (Already Booked)">${num}</div>`;
+  }
+  if (isLadies) {
+    return `<div onclick="pickSeat('${num}')" class="seat-item ladies" title="${num} (Reserved for Women)">${num}</div>`;
+  }
+  return `<div onclick="pickSeat('${num}')" class="seat-item" title="${num} (Available - ₹${basePrice})">${num}</div>`;
+}
+
+function sleeperBtn(num, isSingle) {
+  const isBooked = num === "U1W" || num === "S2W";
+  if (num === activeSeat) {
+    return `<div onclick="pickSeat('${num}', 520)" class="seat-item sleeper selected" title="${num} (Selected Sleeper Berth)">${num}</div>`;
+  }
+  if (isBooked) {
+    return `<div class="seat-item sleeper booked" title="${num} (Booked)">${num}</div>`;
+  }
+  return `<div onclick="pickSeat('${num}', 520)" class="seat-item sleeper" title="${num} (Available Sleeper - ₹520)">${num}</div>`;
+}
+
+function setDeck(deck, btn) {
+  currentDeck = deck;
+  document.getElementById("deck-lower-view").classList.toggle("hidden", deck !== "lower");
+  document.getElementById("deck-upper-view").classList.toggle("hidden", deck !== "upper");
+  
+  if (deck === "lower") {
+    document.getElementById("deck-lower-btn").className = "px-4 py-2 rounded-xl bg-[#d84e55] text-white font-bold text-xs shadow-xs cursor-pointer";
+    document.getElementById("deck-upper-btn").className = "px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs cursor-pointer transition-colors";
+  } else {
+    document.getElementById("deck-upper-btn").className = "px-4 py-2 rounded-xl bg-[#d84e55] text-white font-bold text-xs shadow-xs cursor-pointer";
+    document.getElementById("deck-lower-btn").className = "px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs cursor-pointer transition-colors";
+  }
+}
+
+function pickSeat(seatNum, price) {
+  activeSeat = seatNum;
+  if (price) basePrice = price;
+  
+  const chosenPill = document.getElementById("chosen-seat-pill");
+  if (chosenPill) chosenPill.innerText = "Seat: " + seatNum;
+  
+  const baseDisp = document.getElementById("base-fare-display");
+  if (baseDisp) baseDisp.innerText = "₹" + basePrice + ".00";
+  
+  const gst = Math.round(basePrice * 0.05);
+  const total = basePrice + gst;
+  const totDisp = document.getElementById("total-payable-val");
+  if (totDisp) totDisp.innerText = "₹" + total;
+  
+  localStorage.setItem("autoroute_seat", seatNum);
+  localStorage.setItem("autoroute_total_fare", total.toString());
+  
+  renderLowerDeck();
+  renderUpperDeck();
+}
+
+function updateTripPoints() {
+  const b = document.getElementById("boarding-select").value;
+  const d = document.getElementById("dropping-select").value;
+  localStorage.setItem("autoroute_boarding_point", b);
+  localStorage.setItem("autoroute_dropping_point", d);
+}
+
+async function executeFinalCheckout() {
+  const name = document.getElementById("passenger-name-input").value.trim();
+  const phone = document.getElementById("passenger-phone-input").value.trim();
+  const email = document.getElementById("passenger-email-input").value.trim();
+  const bPoint = document.getElementById("boarding-select").value;
+  const dPoint = document.getElementById("dropping-select").value;
+  
+  localStorage.setItem("autoroute_user_name", name);
+  localStorage.setItem("autoroute_user_phone", phone);
+  localStorage.setItem("autoroute_user_email", email);
+  localStorage.setItem("autoroute_boarding_point", bPoint);
+  localStorage.setItem("autoroute_dropping_point", dPoint);
+  localStorage.setItem("autoroute_seat", activeSeat);
+  
+  // Deduct from wallet if Transit Pay selected
+  const isTransitPay = document.querySelector('input[name="paymethod"]:checked').parentElement.textContent.includes("Transit Pay");
+  if (isTransitPay) {
+    let currentWallet = parseInt(localStorage.getItem("autoroute_wallet") || "1450");
+    const fare = parseInt(localStorage.getItem("autoroute_total_fare") || basePrice.toString());
+    currentWallet = Math.max(0, currentWallet - fare);
+    localStorage.setItem("autoroute_wallet", currentWallet.toString());
+    if (window.updateWalletDisplays) window.updateWalletDisplays(currentWallet);
+  }
+
+  // Create booking via backend REST endpoint
+  try {
+    const res = await fetch("/api/bookings", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        scheduleId: 1,
+        passengerId: 1,
+        seatNumbers: [activeSeat],
+        lastMileMode: "CAB",
+        shareLastMile: true
+      })
+    });
+    if (res.ok) {
+      const data = await res.json();
+      if (data.bookingReference) localStorage.setItem("autoroute_pnr", data.bookingReference);
+      console.log("Confirmed booking with backend:", data.bookingReference);
+    }
+  } catch (err) {
+    console.log("Offline mode, proceeding to digital pass:", err.message);
+  }
+
+  window.location.href = "smart-pass.html";
+}
+
+window.addEventListener("DOMContentLoaded", function() {
+  const bookedService = localStorage.getItem("autoroute_booked_service") || "MSRTC Shivneri AC Scania Multi-Axle";
+  const fare = localStorage.getItem("autoroute_total_fare") || "410";
+  basePrice = parseInt(fare);
+  
+  const titleDisp = document.getElementById("service-title-display");
+  if (titleDisp) titleDisp.innerText = bookedService;
+  
+  const baseDisp = document.getElementById("base-fare-display");
+  if (baseDisp) baseDisp.innerText = "₹" + basePrice + ".00";
+  
+  const totDisp = document.getElementById("total-payable-val");
+  if (totDisp) totDisp.innerText = "₹" + (basePrice + Math.round(basePrice * 0.05));
+  
+  const wallet = localStorage.getItem("autoroute_wallet") || "1450";
+  const payBal = document.getElementById("pay-wallet-balance");
+  if (payBal) payBal.innerText = "Bal: ₹" + parseInt(wallet).toLocaleString("en-IN") + ".00";
+  
+  renderLowerDeck();
+  renderUpperDeck();
+});
+</script>
+</div>
+<script src="js/autoroute-desktop.js"></script>
+</body>
+</html>
